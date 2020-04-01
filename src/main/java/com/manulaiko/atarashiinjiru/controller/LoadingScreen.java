@@ -17,7 +17,7 @@ public class LoadingScreen {
     private void initialize() {
         var transition = new RotateTransition(Duration.seconds(1), loading);
         transition.setByAngle(360);
-        transition.setDuration(Duration.seconds(0.1));
+        transition.setDuration(Duration.seconds(2));
         transition.setDelay(Duration.ZERO);
         transition.setInterpolator(Interpolator.LINEAR);
         transition.setCycleCount(Timeline.INDEFINITE);
