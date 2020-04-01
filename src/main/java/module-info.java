@@ -1,4 +1,4 @@
-module atarashiinjiru.main {
+module shinshinjiru.main {
     requires javafx.fxml;
     requires javafx.web;
     requires spring.boot;
