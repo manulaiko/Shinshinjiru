@@ -1,11 +1,11 @@
 package com.manulaiko.atarashiinjiru;
 
+import com.manulaiko.atarashiinjiru.view.event.StageReadyEvent;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
@@ -41,13 +41,4 @@ public class AtarashiinjiruApplication extends Application {
         Platform.exit();
     }
 
-    public static class StageReadyEvent extends ApplicationEvent {
-        public StageReadyEvent(Stage primaryStage) {
-            super(primaryStage);
-        }
-
-        public Stage getStage() {
-            return (Stage) super.getSource();
-        }
-    }
 }

@@ -1,4 +1,4 @@
-package com.manulaiko.atarashiinjiru.controller;
+package com.manulaiko.atarashiinjiru.presenter;
 
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;

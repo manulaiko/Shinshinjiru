@@ -8,5 +8,7 @@ module atarashiinjiru.main {
     requires spring.core;
 
     opens com.manulaiko.atarashiinjiru;
-    opens com.manulaiko.atarashiinjiru.controller;
+    opens com.manulaiko.atarashiinjiru.presenter;
+    opens com.manulaiko.atarashiinjiru.view.event;
+    opens com.manulaiko.atarashiinjiru.view.handler;
 }
