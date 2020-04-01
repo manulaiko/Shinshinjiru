@@ -1,0 +1,64 @@
+package com.manulaiko.shinshinjiru.oauth;
+
+import com.manulaiko.shinshinjiru.api.APIToken;
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+
+import java.io.IOException;
+
+/**
+ * OAuth callback.
+ * ===============
+ *
+ * Executes the callback received from the OAuth server.
+ *
+ * @author Manulaiko <manulaiko@gmail.com>
+ */
+public class OAuthCallback implements HttpHandler {
+    private static final Logger log      = LoggerFactory.getLogger(OAuthCallback.class);
+    public static final  String URL      = "https://anilist.co/api/v2/oauth/token";
+    private static final String RESPONSE = "Done! You can now close this tab.";
+
+    private final OAuthServer server;
+
+    /**
+     * Constructor.
+     *
+     * @param server OAuth server instance.
+     */
+    public OAuthCallback(OAuthServer server) {
+        this.server = server;
+    }
+
+    @Override
+    public void handle(HttpExchange httpExchange) throws IOException {
+        String[] params = httpExchange.getRequestURI()
+                                      .getQuery()
+                                      .split("=");
+
+        if (!params[0].equals("code")) {
+            throw new RuntimeException("Invalid OAuth response!");
+        }
+
+        log.debug("Received OAuth callback with code " + params[1]);
+
+        var request      = new OAuthTokenRequest(params[1]);
+        var restTemplate = new RestTemplateBuilder().build();
+
+        log.info("Executing AuthToken request...");
+        var response = restTemplate.postForObject(URL, request, APIToken.class);
+        log.info("AuthToken received: " + response);
+
+
+        httpExchange.sendResponseHeaders(200, RESPONSE.length());
+        var out = httpExchange.getResponseBody();
+        out.write(RESPONSE.getBytes());
+        out.flush();
+        out.close();
+
+        server.stop();
+    }
+}

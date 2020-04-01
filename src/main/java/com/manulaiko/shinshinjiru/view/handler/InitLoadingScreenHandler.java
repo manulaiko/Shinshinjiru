@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
@@ -21,12 +23,15 @@ import java.io.IOException;
  */
 @Component
 public class InitLoadingScreenHandler implements ApplicationListener<InitLoadingScreenEvent> {
+    private static final Logger log = LoggerFactory.getLogger(InitLoadingScreenHandler.class);
+
     /**
      * @inheritDoc
      */
     @Override
     public void onApplicationEvent(InitLoadingScreenEvent event) {
         try {
+            log.debug("Loading LoadingScreen...");
             var fxmlLoader = new FXMLLoader(new ClassPathResource("LoadingScreen.fxml").getURL());
             var parent     = (Parent) fxmlLoader.load();
             var stage      = (Stage) event.getSource();

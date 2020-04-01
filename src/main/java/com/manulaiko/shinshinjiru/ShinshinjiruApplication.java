@@ -4,6 +4,8 @@ import com.manulaiko.shinshinjiru.view.event.InitLoadingScreenEvent;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -18,6 +20,24 @@ import org.springframework.context.ConfigurableApplicationContext;
  */
 @SpringBootApplication
 public class ShinshinjiruApplication extends Application {
+    private static final Logger                  log = LoggerFactory.getLogger(ShinshinjiruApplication.class);
+    private static       ShinshinjiruApplication instance;
+
+    /**
+     * Opens an url in the browser.
+     *
+     * @param url URL to open.
+     */
+    public static void openInBrowser(String url) {
+        if (instance == null) {
+            log.warn("Application hasn't be initialized yet!");
+
+            return;
+        }
+
+        instance.getHostServices().showDocument(url);
+    }
+
     /**
      * Main method.
      *
@@ -34,7 +54,8 @@ public class ShinshinjiruApplication extends Application {
      */
     @Override
     public void init() {
-        applicationContext = new SpringApplicationBuilder(ShinshinjiruApplication.class).run();
+        applicationContext               = new SpringApplicationBuilder(ShinshinjiruApplication.class).run();
+        ShinshinjiruApplication.instance = this;
     }
 
     /**
@@ -53,5 +74,4 @@ public class ShinshinjiruApplication extends Application {
         applicationContext.stop();
         Platform.exit();
     }
-
 }
