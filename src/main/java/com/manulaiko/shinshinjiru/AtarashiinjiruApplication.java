@@ -1,6 +1,6 @@
-package com.manulaiko.atarashiinjiru;
+package com.manulaiko.shinshinjiru;
 
-import com.manulaiko.atarashiinjiru.view.event.StageReadyEvent;
+import com.manulaiko.shinshinjiru.view.event.StageReadyEvent;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;

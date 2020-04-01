@@ -1,4 +1,4 @@
-# Atarashiinjiru
+# ShinShinjiru
 Anime-Manga list manager with multiple integrations.
 
 The aim of this project is to offer an alternative to the discontinued [Shinjiru](https://github.com/ShinjiruApp/Shinjiru)
@@ -15,5 +15,5 @@ The goal is to achieve:
  * Launch the episodes and update your progress.
  * Maybe, the social features that AniList has, but for that, you should just use their [web client](https://anilist.co).
  
-For all those non-weebs out there, the name comes from 新しい Atarashii (new) and 信じる Shinjiru (to believe).
+For all those non-weebs out there, the name comes from 新 Shin (new) and 信じる Shinjiru (to believe).
 Since [Shinjiru](https://github.com/ShinjiruApp/Shinjiru) is pretty much dead, this projects aims to be a replacement.

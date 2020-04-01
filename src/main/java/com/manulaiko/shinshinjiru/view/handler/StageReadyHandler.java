@@ -1,6 +1,6 @@
-package com.manulaiko.atarashiinjiru.view.handler;
+package com.manulaiko.shinshinjiru.view.handler;
 
-import com.manulaiko.atarashiinjiru.view.event.StageReadyEvent;
+import com.manulaiko.shinshinjiru.view.event.StageReadyEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
