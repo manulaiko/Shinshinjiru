@@ -8,11 +8,22 @@ import javafx.scene.control.Label;
 import javafx.util.Duration;
 import org.springframework.stereotype.Controller;
 
+/**
+ * Loading screen presenter.
+ * =========================
+ *
+ * Handles the loading screen logic.
+ *
+ * @author Manulaiko <manulaiko@gmail.com>
+ */
 @Controller
 public class LoadingScreen {
     @FXML
     private Label loading;
 
+    /**
+     * Initializes the rotate transition in the loading label.
+     */
     @FXML
     private void initialize() {
         var transition = new RotateTransition(Duration.seconds(1), loading);

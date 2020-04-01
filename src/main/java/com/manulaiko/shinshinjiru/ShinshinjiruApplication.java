@@ -8,10 +8,23 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
+/**
+ * Shinshinjiru Application.
+ * =========================
+ *
+ * Application bootstrap.
+ *
+ * @author Manulaiko <manulaiko@gmail.com>
+ */
 @SpringBootApplication
-public class AtarashiinjiruApplication extends Application {
+public class ShinshinjiruApplication extends Application {
+    /**
+     * Main method.
+     *
+     * @param args Command line arguments.
+     */
     public static void main(String[] args) {
-        Application.launch(AtarashiinjiruApplication.class, args);
+        Application.launch(ShinshinjiruApplication.class, args);
     }
 
     private ConfigurableApplicationContext applicationContext;
@@ -21,7 +34,7 @@ public class AtarashiinjiruApplication extends Application {
      */
     @Override
     public void init() {
-        applicationContext = new SpringApplicationBuilder(AtarashiinjiruApplication.class).run();
+        applicationContext = new SpringApplicationBuilder(ShinshinjiruApplication.class).run();
     }
 
     /**

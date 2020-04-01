@@ -9,7 +9,7 @@ plugins {
 group = 'com.manulaiko'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '13'
-mainClassName = 'shinshinjiru.main/com.manulaiko.shinshinjiru.AtarashiinjiruApplication'
+mainClassName = 'shinshinjiru.main/com.manulaiko.shinshinjiru.ShinshinjiruApplication'
 
 configurations {
     compileOnly {
