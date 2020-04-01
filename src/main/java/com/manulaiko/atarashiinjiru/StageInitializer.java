@@ -21,8 +21,9 @@ public class StageInitializer implements ApplicationListener<AtarashiinjiruAppli
             var parent     = (Parent) fxmlLoader.load();
 
             var stage = event.getStage();
-            stage.setScene(new Scene(parent, 800, 600));
+            stage.setScene(new Scene(parent));
             stage.show();
+            stage.toFront();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
