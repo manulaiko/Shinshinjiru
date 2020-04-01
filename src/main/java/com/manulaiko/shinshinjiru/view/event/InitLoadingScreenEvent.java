@@ -3,8 +3,8 @@ package com.manulaiko.shinshinjiru.view.event;
 import javafx.stage.Stage;
 import org.springframework.context.ApplicationEvent;
 
-public class StageReadyEvent extends ApplicationEvent {
-    public StageReadyEvent(Stage primaryStage) {
+public class InitLoadingScreenEvent extends ApplicationEvent {
+    public InitLoadingScreenEvent(Stage primaryStage) {
         super(primaryStage);
     }
 

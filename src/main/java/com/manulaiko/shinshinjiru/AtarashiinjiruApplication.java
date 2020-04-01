@@ -1,6 +1,6 @@
 package com.manulaiko.shinshinjiru;
 
-import com.manulaiko.shinshinjiru.view.event.StageReadyEvent;
+import com.manulaiko.shinshinjiru.view.event.InitLoadingScreenEvent;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -29,7 +29,7 @@ public class AtarashiinjiruApplication extends Application {
      */
     @Override
     public void start(Stage primaryStage) {
-        applicationContext.publishEvent(new StageReadyEvent(primaryStage));
+        applicationContext.publishEvent(new InitLoadingScreenEvent(primaryStage));
     }
 
     /**

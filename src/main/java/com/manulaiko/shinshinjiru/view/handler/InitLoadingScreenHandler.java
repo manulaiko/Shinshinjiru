@@ -1,6 +1,6 @@
 package com.manulaiko.shinshinjiru.view.handler;
 
-import com.manulaiko.shinshinjiru.view.event.StageReadyEvent;
+import com.manulaiko.shinshinjiru.view.event.InitLoadingScreenEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,12 +11,12 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 @Component
-public class StageReadyHandler implements ApplicationListener<StageReadyEvent> {
+public class InitLoadingScreenHandler implements ApplicationListener<InitLoadingScreenEvent> {
     /**
      * @inheritDoc
      */
     @Override
-    public void onApplicationEvent(StageReadyEvent event) {
+    public void onApplicationEvent(InitLoadingScreenEvent event) {
         try {
             var fxmlLoader = new FXMLLoader(new ClassPathResource("LoadingScreen.fxml").getURL());
             var parent     = (Parent) fxmlLoader.load();
