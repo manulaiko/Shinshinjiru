@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 
 /**
@@ -36,6 +37,21 @@ public class ShinshinjiruApplication extends Application {
         }
 
         instance.getHostServices().showDocument(url);
+    }
+
+    /**
+     * Returns the application context.
+     *
+     * @return Application context.
+     *
+     * @throws RuntimeException
+     */
+    public static ApplicationContext getApplicationContext() {
+        if (instance == null) {
+            throw new RuntimeException("Application hasn't be initialized yet!");
+        }
+
+        return instance.applicationContext;
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.manulaiko.shinshinjiru.view.handler;
 
+import com.manulaiko.shinshinjiru.view.ContextAwareFXMLLoader;
 import com.manulaiko.shinshinjiru.view.event.InitLoadingScreenEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -32,7 +33,7 @@ public class InitLoadingScreenHandler implements ApplicationListener<InitLoading
     public void onApplicationEvent(InitLoadingScreenEvent event) {
         try {
             log.debug("Loading LoadingScreen...");
-            var fxmlLoader = new FXMLLoader(new ClassPathResource("LoadingScreen.fxml").getURL());
+            var fxmlLoader = new ContextAwareFXMLLoader("LoadingScreen.fxml");
             var parent     = (Parent) fxmlLoader.load();
             var stage      = (Stage) event.getSource();
 
