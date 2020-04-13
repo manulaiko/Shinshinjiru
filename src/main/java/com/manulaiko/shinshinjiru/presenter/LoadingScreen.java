@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.util.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -26,6 +27,9 @@ public class LoadingScreen {
 
     @FXML
     private Label loading;
+
+    @Autowired
+    private OAuthServer server;
 
     /**
      * Initializes the rotate transition in the loading label.
@@ -50,8 +54,6 @@ public class LoadingScreen {
      */
     private void startOauthCallbackServer() {
         log.info("Starting OAuth Callback server...");
-
-        var server = new OAuthServer();
         server.start();
 
         log.info("Opening browser...");

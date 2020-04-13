@@ -3,6 +3,8 @@ package com.manulaiko.shinshinjiru.oauth;
 import com.sun.net.httpserver.HttpServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.net.InetSocketAddress;
 
@@ -14,6 +16,7 @@ import java.net.InetSocketAddress;
  *
  * @author Manulaiko <manulaiko@gmail.com>
  */
+@Component
 public class OAuthServer {
     private static final Logger log           = LoggerFactory.getLogger(OAuthServer.class);
     public static final  int    PORT          = 9876;
@@ -22,6 +25,9 @@ public class OAuthServer {
     public static final  String RESPONSE_TYPE = "code";
 
     private HttpServer server;
+
+    @Autowired
+    private OAuthCallback callback;
 
     /**
      * Returns the OAuth url.
@@ -54,7 +60,7 @@ public class OAuthServer {
     private void createServer() {
         try {
             server = HttpServer.create(new InetSocketAddress(PORT), 0);
-            server.createContext(CALLBACK, new OAuthCallback(this));
+            server.createContext(CALLBACK, callback);
         } catch (Exception e) {
             System.out.println("Couldn't start HttpServer! " + e.getMessage());
             e.printStackTrace();
