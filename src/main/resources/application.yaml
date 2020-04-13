@@ -5,3 +5,16 @@ spring:
 logging:
   level:
     root: info
+
+oauth:
+  port: 9876
+  endpoint: /callback
+  response-type: code
+  url: https://anilist.co/api/v2/oauth/token
+  open-url: https://anilist.co/api/v2/oauth/authorize?client_id=${oauth.request.client-id}&response_type=${oauth.response-type}
+  message: Done! You can now close this tab.
+  request:
+    grant-type: authorization_code
+    client-id: 3310
+    redirect-uri: http://localhost:${oauth.port}${oauth.endpoint}
+    client-secret: zP4dlV02hPyhAMRznt69loaMovx2hcjiGVcLhXfF

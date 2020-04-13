@@ -4,7 +4,9 @@ import com.sun.net.httpserver.HttpServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.net.InetSocketAddress;
 
@@ -16,30 +18,20 @@ import java.net.InetSocketAddress;
  *
  * @author Manulaiko <manulaiko@gmail.com>
  */
-@Component
+@Service
 public class OAuthServer {
-    private static final Logger log           = LoggerFactory.getLogger(OAuthServer.class);
-    public static final  int    PORT          = 9876;
-    public static final  String CALLBACK      = "/callback";
-    public static final  int    CLIENT_ID     = 3310;
-    public static final  String RESPONSE_TYPE = "code";
+    private static final Logger log = LoggerFactory.getLogger(OAuthServer.class);
 
     private HttpServer server;
 
     @Autowired
-    private OAuthCallback callback;
+    private OAuthCallback authCallback;
 
-    /**
-     * Returns the OAuth url.
-     *
-     * @return URL to open in browser.
-     */
-    public String getUrl() {
-        return "https://anilist.co/api/v2/oauth/authorize?client_id=" +
-               CLIENT_ID +
-               "&response_type=" +
-               RESPONSE_TYPE;
-    }
+    @Value("${oauth.port}")
+    private Integer port;
+
+    @Value("${oauth.endpoint}")
+    private String endpoint;
 
     /**
      * Starts the HttpServer.
@@ -51,7 +43,7 @@ public class OAuthServer {
         }
 
         server.start();
-        log.debug("OAuthServer started at port " + PORT);
+        log.debug("OAuthServer started at port " + port);
     }
 
     /**
@@ -59,8 +51,8 @@ public class OAuthServer {
      */
     private void createServer() {
         try {
-            server = HttpServer.create(new InetSocketAddress(PORT), 0);
-            server.createContext(CALLBACK, callback);
+            server = HttpServer.create(new InetSocketAddress(port), 0);
+            server.createContext(endpoint, authCallback);
         } catch (Exception e) {
             System.out.println("Couldn't start HttpServer! " + e.getMessage());
             e.printStackTrace();

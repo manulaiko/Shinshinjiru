@@ -7,6 +7,7 @@ import com.sun.net.httpserver.HttpHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Component;
 
@@ -22,9 +23,13 @@ import java.io.IOException;
  */
 @Component
 public class OAuthCallback implements HttpHandler {
-    private static final Logger log      = LoggerFactory.getLogger(OAuthCallback.class);
-    public static final  String URL      = "https://anilist.co/api/v2/oauth/token";
-    private static final String RESPONSE = "Done! You can now close this tab.";
+    private static final Logger log = LoggerFactory.getLogger(OAuthCallback.class);
+
+    @Value("${oauth.url}")
+    private String url;
+
+    @Value("${oauth.message}")
+    private String message;
 
     @Autowired
     private OAuthServer server;
@@ -44,18 +49,18 @@ public class OAuthCallback implements HttpHandler {
 
         log.debug("Received OAuth callback with code " + params[1]);
 
-        var request      = new OAuthTokenRequest(params[1]);
+        var request      = new OAuthTokenRequest();
         var restTemplate = new RestTemplateBuilder().build();
 
+        request.setCode(params[1]);
         log.info("Executing AuthToken request...");
-        var response = restTemplate.postForObject(URL, request, APIToken.class);
+        var response = restTemplate.postForObject(url, request, APIToken.class);
         service.setToken(response);
         log.info("AuthToken received: " + response);
 
-
-        httpExchange.sendResponseHeaders(200, RESPONSE.length());
+        httpExchange.sendResponseHeaders(200, message.length());
         var out = httpExchange.getResponseBody();
-        out.write(RESPONSE.getBytes());
+        out.write(message.getBytes());
         out.flush();
         out.close();
 

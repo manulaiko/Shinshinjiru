@@ -1,5 +1,7 @@
 package com.manulaiko.shinshinjiru.oauth;
 
+import org.springframework.beans.factory.annotation.Value;
+
 /**
  * OAuth token request.
  * ====================
@@ -9,19 +11,21 @@ package com.manulaiko.shinshinjiru.oauth;
  * @author Manulaiko <manulaiko@gmail.com>
  */
 public class OAuthTokenRequest {
-    public final String grant_type    = "authorization_code";
-    public final String client_id     = String.valueOf(OAuthServer.CLIENT_ID);
-    public final String redirect_uri  = "http://localhost:"+ OAuthServer.PORT + OAuthServer.CALLBACK;
-    public final String client_secret = "zP4dlV02hPyhAMRznt69loaMovx2hcjiGVcLhXfF";
+    @Value("${oauth.request.grant-type}")
+    public String grant_type;
+
+    @Value("${oauth.request.client-id}")
+    public String client_id;
+
+    @Value("${oauth.request.redirect-uri}")
+    public String redirect_uri;
+
+    @Value("${oauth.request.client-secret}")
+    public String client_secret;
 
     public String code;
 
-    /**
-     * Constructor.
-     *
-     * @param code Callback code.
-     */
-    public OAuthTokenRequest(String code) {
+    public void setCode(String code) {
         this.code = code;
     }
 }
