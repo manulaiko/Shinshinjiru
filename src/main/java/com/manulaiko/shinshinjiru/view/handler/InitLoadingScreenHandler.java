@@ -2,14 +2,12 @@ package com.manulaiko.shinshinjiru.view.handler;
 
 import com.manulaiko.shinshinjiru.view.ContextAwareFXMLLoader;
 import com.manulaiko.shinshinjiru.view.event.InitLoadingScreenEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;

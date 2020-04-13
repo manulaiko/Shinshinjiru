@@ -37,6 +37,9 @@ public class OAuthCallback implements HttpHandler {
     @Autowired
     private APIService service;
 
+    @Autowired
+    private OAuthTokenRequest request;
+
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
         String[] params = httpExchange.getRequestURI()
@@ -49,7 +52,6 @@ public class OAuthCallback implements HttpHandler {
 
         log.debug("Received OAuth callback with code " + params[1]);
 
-        var request      = new OAuthTokenRequest();
         var restTemplate = new RestTemplateBuilder().build();
 
         request.setCode(params[1]);

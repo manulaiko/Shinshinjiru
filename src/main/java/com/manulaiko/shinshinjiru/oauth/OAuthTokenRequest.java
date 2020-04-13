@@ -1,6 +1,7 @@
 package com.manulaiko.shinshinjiru.oauth;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  * OAuth token request.
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
  *
  * @author Manulaiko <manulaiko@gmail.com>
  */
+@Component
 public class OAuthTokenRequest {
     @Value("${oauth.request.grant-type}")
     public String grant_type;
