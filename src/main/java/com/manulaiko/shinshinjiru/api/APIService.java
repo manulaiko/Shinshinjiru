@@ -1,5 +1,7 @@
 package com.manulaiko.shinshinjiru.api;
 
+import org.springframework.stereotype.Service;
+
 /**
  * API Service.
  * ============
@@ -8,6 +10,7 @@ package com.manulaiko.shinshinjiru.api;
  *
  * @author Manulaiko <manulaiko@gmail.com>
  */
+@Service
 public class APIService {
     private APIToken token;
 
