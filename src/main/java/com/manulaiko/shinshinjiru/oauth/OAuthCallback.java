@@ -1,10 +1,12 @@
 package com.manulaiko.shinshinjiru.oauth;
 
+import com.manulaiko.shinshinjiru.api.APIService;
 import com.manulaiko.shinshinjiru.api.APIToken;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 
 import java.io.IOException;
@@ -23,6 +25,9 @@ public class OAuthCallback implements HttpHandler {
     private static final String RESPONSE = "Done! You can now close this tab.";
 
     private final OAuthServer server;
+
+    @Autowired
+    private APIService service;
 
     /**
      * Constructor.
@@ -50,6 +55,7 @@ public class OAuthCallback implements HttpHandler {
 
         log.info("Executing AuthToken request...");
         var response = restTemplate.postForObject(URL, request, APIToken.class);
+        service.setToken(response);
         log.info("AuthToken received: " + response);
 
 
