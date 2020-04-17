@@ -1,13 +1,15 @@
 module shinshinjiru.main {
     requires javafx.fxml;
     requires javafx.web;
+    requires javafx.controls;
+
     requires spring.boot;
     requires spring.boot.autoconfigure;
     requires spring.context;
     requires spring.beans;
     requires spring.core;
-    requires jdk.httpserver;
     requires spring.web;
+
     requires com.fasterxml.classmate;
     requires com.fasterxml.jackson.annotation;
     requires com.fasterxml.jackson.core;
@@ -15,6 +17,8 @@ module shinshinjiru.main {
     requires com.fasterxml.jackson.datatype.jdk8;
     requires com.fasterxml.jackson.datatype.jsr310;
     requires com.fasterxml.jackson.module.paramnames;
+
+    requires jdk.httpserver;
     requires org.slf4j;
 
     opens com.manulaiko.shinshinjiru;
