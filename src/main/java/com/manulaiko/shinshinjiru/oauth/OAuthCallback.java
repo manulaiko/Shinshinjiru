@@ -1,12 +1,12 @@
 package com.manulaiko.shinshinjiru.oauth;
 
+import com.manulaiko.shinshinjiru.ShinshinjiruApplication;
 import com.manulaiko.shinshinjiru.api.APIService;
 import com.manulaiko.shinshinjiru.api.APIToken;
+import com.manulaiko.shinshinjiru.view.event.InitMainScreenEvent;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -67,5 +67,6 @@ public class OAuthCallback implements HttpHandler {
         out.close();
 
         server.stop();
+        ShinshinjiruApplication.publish(new InitMainScreenEvent());
     }
 }

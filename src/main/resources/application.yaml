@@ -4,7 +4,7 @@ spring:
 
 logging:
   level:
-    root: info
+    root: debug
 
 oauth:
   port: 9876
