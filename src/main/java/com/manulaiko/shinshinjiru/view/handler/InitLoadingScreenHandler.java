@@ -5,6 +5,7 @@ import com.manulaiko.shinshinjiru.view.event.InitLoadingScreenEvent;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
@@ -21,9 +22,8 @@ import java.io.IOException;
  * @author Manulaiko <manulaiko@gmail.com>
  */
 @Component
+@Slf4j
 public class InitLoadingScreenHandler implements ApplicationListener<InitLoadingScreenEvent> {
-    private static final Logger log = LoggerFactory.getLogger(InitLoadingScreenHandler.class);
-
     /**
      * @inheritDoc
      */

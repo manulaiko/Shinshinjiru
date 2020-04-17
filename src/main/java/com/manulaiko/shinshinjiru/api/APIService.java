@@ -1,5 +1,6 @@
 package com.manulaiko.shinshinjiru.api;
 
+import lombok.Data;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,14 +12,7 @@ import org.springframework.stereotype.Service;
  * @author Manulaiko <manulaiko@gmail.com>
  */
 @Service
+@Data
 public class APIService {
     private APIToken token;
-
-    public APIToken getToken() {
-        return token;
-    }
-
-    public void setToken(APIToken token) {
-        this.token = token;
-    }
 }

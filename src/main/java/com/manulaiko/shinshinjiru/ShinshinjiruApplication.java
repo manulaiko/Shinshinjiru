@@ -4,8 +4,7 @@ import com.manulaiko.shinshinjiru.view.event.InitLoadingScreenEvent;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
@@ -20,9 +19,9 @@ import org.springframework.context.ConfigurableApplicationContext;
  * @author Manulaiko <manulaiko@gmail.com>
  */
 @SpringBootApplication
+@Slf4j
 public class ShinshinjiruApplication extends Application {
-    private static final Logger                  log = LoggerFactory.getLogger(ShinshinjiruApplication.class);
-    private static       ShinshinjiruApplication instance;
+    private static ShinshinjiruApplication instance;
 
     /**
      * Opens an url in the browser.

@@ -1,5 +1,8 @@
 package com.manulaiko.shinshinjiru.api;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+
 /**
  * API Token.
  * ==========
@@ -8,25 +11,17 @@ package com.manulaiko.shinshinjiru.api;
  *
  * @author Manulaiko <manulaiko@gmail.com>
  */
+@Getter
 public class APIToken {
-    private String token_type;
-    private int    expires_in;
-    private String access_token;
-    private String refresh_token;
+    @JsonProperty("token_type")
+    private String tokenType;
 
-    public String getTokenType() {
-        return token_type;
-    }
+    @JsonProperty("expires_in")
+    private int expiresIn;
 
-    public int getExpiresIn() {
-        return expires_in;
-    }
+    @JsonProperty("access_token")
+    private String accessToken;
 
-    public String getAccessToken() {
-        return access_token;
-    }
-
-    public String getRefreshToken() {
-        return refresh_token;
-    }
+    @JsonProperty("refresh_token")
+    private String refreshToken;
 }

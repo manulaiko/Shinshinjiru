@@ -1,5 +1,7 @@
 package com.manulaiko.shinshinjiru.oauth;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -12,22 +14,23 @@ import org.springframework.stereotype.Component;
  * @author Manulaiko <manulaiko@gmail.com>
  */
 @Component
+@Data
 public class OAuthTokenRequest {
     @Value("${oauth.request.grant-type}")
-    public String grant_type;
+    @JsonProperty("grant_type")
+    public String grantType;
 
     @Value("${oauth.request.client-id}")
-    public String client_id;
+    @JsonProperty("client_id")
+    public String clientId;
 
     @Value("${oauth.request.redirect-uri}")
-    public String redirect_uri;
+    @JsonProperty("redirect_uri")
+    public String redirectUri;
 
     @Value("${oauth.request.client-secret}")
-    public String client_secret;
+    @JsonProperty("client_secret")
+    public String clientSecret;
 
     public String code;
-
-    public void setCode(String code) {
-        this.code = code;
-    }
 }

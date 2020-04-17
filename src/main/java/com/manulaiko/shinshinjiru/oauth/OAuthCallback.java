@@ -4,6 +4,7 @@ import com.manulaiko.shinshinjiru.api.APIService;
 import com.manulaiko.shinshinjiru.api.APIToken;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,8 @@ import java.io.IOException;
  * @author Manulaiko <manulaiko@gmail.com>
  */
 @Component
+@Slf4j
 public class OAuthCallback implements HttpHandler {
-    private static final Logger log = LoggerFactory.getLogger(OAuthCallback.class);
-
     @Value("${oauth.url}")
     private String url;
 

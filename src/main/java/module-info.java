@@ -20,9 +20,11 @@ module shinshinjiru.main {
 
     requires jdk.httpserver;
     requires org.slf4j;
+    requires lombok;
 
     opens com.manulaiko.shinshinjiru;
     opens com.manulaiko.shinshinjiru.presenter;
+    opens com.manulaiko.shinshinjiru.view;
     opens com.manulaiko.shinshinjiru.view.event;
     opens com.manulaiko.shinshinjiru.view.handler;
     opens com.manulaiko.shinshinjiru.oauth;

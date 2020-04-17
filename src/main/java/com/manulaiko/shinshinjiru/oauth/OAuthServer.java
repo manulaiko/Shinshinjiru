@@ -1,6 +1,7 @@
 package com.manulaiko.shinshinjiru.oauth;
 
 import com.sun.net.httpserver.HttpServer;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,8 @@ import java.net.InetSocketAddress;
  * @author Manulaiko <manulaiko@gmail.com>
  */
 @Service
+@Slf4j
 public class OAuthServer {
-    private static final Logger log = LoggerFactory.getLogger(OAuthServer.class);
-
     private HttpServer server;
 
     @Autowired
