@@ -2,6 +2,7 @@ module shinshinjiru.main {
     requires javafx.fxml;
     requires javafx.web;
     requires javafx.controls;
+    requires jfxtras.controls;
 
     requires spring.boot;
     requires spring.boot.autoconfigure;

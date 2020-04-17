@@ -1,5 +1,6 @@
 package com.manulaiko.shinshinjiru;
 
+import com.manulaiko.shinshinjiru.view.SceneManager;
 import com.manulaiko.shinshinjiru.view.event.InitLoadingScreenEvent;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -8,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ConfigurableApplicationContext;
 
 /**
@@ -29,12 +31,6 @@ public class ShinshinjiruApplication extends Application {
      * @param url URL to open.
      */
     public static void openInBrowser(String url) {
-        if (instance == null) {
-            log.warn("Application hasn't be initialized yet!");
-
-            return;
-        }
-
         instance.getHostServices().showDocument(url);
     }
 
@@ -42,15 +38,18 @@ public class ShinshinjiruApplication extends Application {
      * Returns the application context.
      *
      * @return Application context.
-     *
-     * @throws RuntimeException
      */
     public static ApplicationContext getApplicationContext() {
-        if (instance == null) {
-            throw new RuntimeException("Application hasn't be initialized yet!");
-        }
-
         return instance.applicationContext;
+    }
+
+    /**
+     * Publishes an event in the app context.
+     *
+     * @param event Event to publish.
+     */
+    public static void publish(ApplicationEvent event) {
+        instance.applicationContext.publishEvent(event);
     }
 
     /**
@@ -77,8 +76,11 @@ public class ShinshinjiruApplication extends Application {
      * @inheritDoc
      */
     @Override
-    public void start(Stage primaryStage) {
-        applicationContext.publishEvent(new InitLoadingScreenEvent(primaryStage));
+    public void start(Stage stage) {
+        var sceneManager = applicationContext.getBean(SceneManager.class);
+        sceneManager.setRootStage(stage);
+
+        applicationContext.publishEvent(new InitLoadingScreenEvent());
     }
 
     /**

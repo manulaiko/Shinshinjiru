@@ -1,6 +1,5 @@
 package com.manulaiko.shinshinjiru.view.event;
 
-import javafx.stage.Stage;
 import org.springframework.context.ApplicationEvent;
 
 /**
@@ -14,10 +13,8 @@ import org.springframework.context.ApplicationEvent;
 public class InitLoadingScreenEvent extends ApplicationEvent {
     /**
      * Constructor.
-     *
-     * @param primaryStage Root stage.
      */
-    public InitLoadingScreenEvent(Stage primaryStage) {
-        super(primaryStage);
+    public InitLoadingScreenEvent() {
+        super(new Object());
     }
 }
