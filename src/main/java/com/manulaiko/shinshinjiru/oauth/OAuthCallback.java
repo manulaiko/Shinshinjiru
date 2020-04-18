@@ -63,6 +63,6 @@ public class OAuthCallback implements HttpHandler {
         out.flush();
         out.close();
 
-        ShinshinjiruApplication.publish(new StopOauthServerEvent());
+        ShinshinjiruApplication.publish(new StopOauthServerEvent(this));
     }
 }

@@ -12,9 +12,9 @@ import org.springframework.context.ApplicationEvent;
  */
 public class StopOauthServerEvent extends ApplicationEvent {
     /**
-     * Constructor.
+     * @inheritDoc
      */
-    public StopOauthServerEvent() {
-        super(new Object());
+    public StopOauthServerEvent(Object source) {
+        super(source);
     }
 }

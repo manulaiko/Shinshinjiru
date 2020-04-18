@@ -12,9 +12,9 @@ import org.springframework.context.ApplicationEvent;
  */
 public class ShowLoadingLabelEvent extends ApplicationEvent {
     /**
-     * Constructor.
+     * @inheritDoc
      */
-    public ShowLoadingLabelEvent() {
-        super(new Object());
+    public ShowLoadingLabelEvent(Object source) {
+        super(source);
     }
 }

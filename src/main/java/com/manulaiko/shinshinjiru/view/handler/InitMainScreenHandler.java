@@ -33,9 +33,9 @@ public class InitMainScreenHandler implements ApplicationListener<InitMainScreen
         sceneManager.show();
 
         // Show loading
-        ShinshinjiruApplication.publish(new ShowLoadingLabelEvent());
+        ShinshinjiruApplication.publish(new ShowLoadingLabelEvent(this));
 
         // Start OAuth server
-        ShinshinjiruApplication.publish(new StartOauthServerEvent());
+        ShinshinjiruApplication.publish(new StartOauthServerEvent(this));
     }
 }

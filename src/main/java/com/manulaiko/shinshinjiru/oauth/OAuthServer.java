@@ -47,7 +47,7 @@ public class OAuthServer {
         server.start();
         log.debug("OAuthServer started at port " + port);
 
-        ShinshinjiruApplication.publish(new OauthServerStartedEvent());
+        ShinshinjiruApplication.publish(new OauthServerStartedEvent(this));
     }
 
     /**

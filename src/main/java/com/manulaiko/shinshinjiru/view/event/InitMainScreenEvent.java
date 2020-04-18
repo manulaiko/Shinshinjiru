@@ -12,9 +12,9 @@ import org.springframework.context.ApplicationEvent;
  */
 public class InitMainScreenEvent extends ApplicationEvent {
     /**
-     * Constructor
+     * @inheritDoc
      */
-    public InitMainScreenEvent() {
-        super(new Object());
+    public InitMainScreenEvent(Object source) {
+        super(source);
     }
 }
