@@ -330,178 +330,6 @@ type AniChartUser {
   highlights: Json
 }
 
-"""A character that features in an anime or manga"""
-type Character {
-  """The id of the character"""
-  id: Int!
-
-  """The names of the character"""
-  name: CharacterName
-
-  """Character images"""
-  image: CharacterImage
-
-  """A general description of the character"""
-  description(
-    """Return the string in pre-parsed html instead of markdown"""
-    asHtml: Boolean
-  ): String
-
-  """
-  If the character is marked as favourite by the currently authenticated user
-  """
-  isFavourite: Boolean!
-
-  """The url for the character page on the AniList website"""
-  siteUrl: String
-
-  """Media that includes the character"""
-  media(
-    sort: [MediaSort]
-    type: MediaType
-
-    """The page"""
-    page: Int
-
-    """The amount of entries per page, max 25"""
-    perPage: Int
-  ): MediaConnection
-  updatedAt: Int @deprecated(reason: "No data available")
-
-  """The amount of user's who have favourited the character"""
-  favourites: Int
-}
-
-type CharacterConnection {
-  edges: [CharacterEdge]
-  nodes: [Character]
-
-  """The pagination information"""
-  pageInfo: PageInfo
-}
-
-"""Character connection edge"""
-type CharacterEdge {
-  node: Character
-
-  """The id of the connection"""
-  id: Int
-
-  """The characters role in the media"""
-  role: CharacterRole
-
-  """The voice actors of the character"""
-  voiceActors(language: StaffLanguage, sort: [StaffSort]): [Staff]
-
-  """The media the character is in"""
-  media: [Media]
-
-  """The order the character should be displayed from the users favourites"""
-  favouriteOrder: Int
-}
-
-type CharacterImage {
-  """The character's image of media at its largest size"""
-  large: String
-
-  """The character's image of media at medium size"""
-  medium: String
-}
-
-"""The names of the character"""
-type CharacterName {
-  """The character's given name"""
-  first: String
-
-  """The character's surname"""
-  last: String
-
-  """The character's full name"""
-  full: String
-
-  """Other names the character might be referred to as"""
-  alternative: [String]
-}
-
-"""The names of the character"""
-input CharacterNameInput {
-  """The character's given name"""
-  first: String
-
-  """The character's surname"""
-  last: String
-
-  """Other names the character might be referred by"""
-  alternative: [String]
-}
-
-"""The role the character plays in the media"""
-enum CharacterRole {
-  """A primary character role in the media"""
-  MAIN
-
-  """A supporting character role in the media"""
-  SUPPORTING
-
-  """A background character in the media"""
-  BACKGROUND
-}
-
-"""Character sort enums"""
-enum CharacterSort {
-  ID
-  ID_DESC
-  ROLE
-  ROLE_DESC
-  SEARCH_MATCH
-  FAVOURITES
-  FAVOURITES_DESC
-}
-
-"""A submission for a character that features in an anime or manga"""
-type CharacterSubmission {
-  """The id of the submission"""
-  id: Int!
-
-  """Character that the submission is referencing"""
-  character: Character
-
-  """The character submission changes"""
-  submission: Character
-
-  """Submitter for the submission"""
-  submitter: User
-
-  """Status of the submission"""
-  status: SubmissionStatus
-
-  """Inner details of submission status"""
-  notes: String
-  createdAt: Int
-}
-
-type CharacterSubmissionConnection {
-  edges: [CharacterSubmissionEdge]
-  nodes: [CharacterSubmission]
-
-  """The pagination information"""
-  pageInfo: PageInfo
-}
-
-"""CharacterSubmission connection edge"""
-type CharacterSubmissionEdge {
-  node: CharacterSubmission
-
-  """The characters role in the media"""
-  role: CharacterRole
-
-  """The voice actors of the character"""
-  voiceActors: [Staff]
-
-  """The submitted voice actors of the character"""
-  submittedVoiceActors: [StaffSubmission]
-}
-
 """ISO 3166-1 alpha-2 country code"""
 scalar CountryCode
 
@@ -530,15 +358,6 @@ type Favourites {
     """The amount of entries per page, max 25"""
     perPage: Int
   ): MediaConnection
-
-  """Favourite characters"""
-  characters(
-    """The page number"""
-    page: Int
-
-    """The amount of entries per page, max 25"""
-    perPage: Int
-  ): CharacterConnection
 
   """Favourite staff"""
   staff(
@@ -638,15 +457,6 @@ type InternalPage {
     """Filter by the media's type"""
     type: MediaType
   ): [MediaSubmission]
-  characterSubmissions(
-    characterId: Int
-
-    """Filter by the submitter of the submission"""
-    userId: Int
-
-    """Filter by the status of the submission"""
-    status: SubmissionStatus
-  ): [CharacterSubmission]
   staffSubmissions(
     staffId: Int
 
@@ -893,25 +703,6 @@ type InternalPage {
     """The order the results will be returned in"""
     sort: [MediaSort]
   ): [Media]
-  characters(
-    """Filter by character id"""
-    id: Int
-
-    """Filter by search query"""
-    search: String
-
-    """Filter by character id"""
-    id_not: Int
-
-    """Filter by character id"""
-    id_in: [Int]
-
-    """Filter by character id"""
-    id_not_in: [Int]
-
-    """The order the results will be returned in"""
-    sort: [CharacterSort]
-  ): [Character]
   staff(
     """Filter by the staff id"""
     id: Int
@@ -1279,47 +1070,6 @@ type InternalPage {
     """Filter by the parent id"""
     activityId: Int
   ): [ActivityReply]
-  threads(
-    """Filter by the thread id"""
-    id: Int
-
-    """Filter by the user id of the thread's creator"""
-    userId: Int
-
-    """Filter by the user id of the last user to comment on the thread"""
-    replyUserId: Int
-
-    """Filter by if the currently authenticated user's subscribed threads"""
-    subscribed: Boolean
-
-    """Filter by thread category id"""
-    categoryId: Int
-
-    """Filter by thread media id category"""
-    mediaCategoryId: Int
-
-    """Filter by search query"""
-    search: String
-
-    """Filter by the thread id"""
-    id_in: [Int]
-
-    """The order the results will be returned in"""
-    sort: [ThreadSort]
-  ): [Thread]
-  threadComments(
-    """Filter by the comment id"""
-    id: Int
-
-    """Filter by the thread id"""
-    threadId: Int
-
-    """Filter by the user id of the comment's creator"""
-    userId: Int
-
-    """The order the results will be returned in"""
-    sort: [ThreadCommentSort]
-  ): [ThreadComment]
   reviews(
     """Filter by Review id"""
     id: Int
@@ -1384,7 +1134,7 @@ enum LikeableType {
 }
 
 """Likeable union type"""
-union LikeableUnion = ListActivity | TextActivity | MessageActivity | ActivityReply | Thread | ThreadComment
+union LikeableUnion = ListActivity | TextActivity | MessageActivity | ActivityReply
 
 """User list activity (anime & manga updates)"""
 type ListActivity {
@@ -1555,18 +1305,6 @@ type Media {
   """Other media in the same or connecting franchise"""
   relations: MediaConnection
 
-  """The characters in the media"""
-  characters(
-    sort: [CharacterSort]
-    role: CharacterRole
-
-    """The page"""
-    page: Int
-
-    """The amount of entries per page, max 25"""
-    perPage: Int
-  ): CharacterConnection
-
   """The staff who produced the media"""
   staff(
     sort: [StaffSort]
@@ -1669,20 +1407,6 @@ type Media {
   modNotes: String
 }
 
-"""Internal - Media characters separated"""
-type MediaCharacter {
-  """The id of the connection"""
-  id: Int
-
-  """The characters role in the media"""
-  role: CharacterRole
-
-  """The characters in the media voiced by the parent actor"""
-  character: Character
-
-  """The voice actor of the character"""
-  voiceActor: Staff
-}
 
 type MediaConnection {
   edges: [MediaEdge]
@@ -1725,12 +1449,6 @@ type MediaEdge {
   If the studio is the main animation studio of the media (For Studio->MediaConnection field only)
   """
   isMainStudio: Boolean!
-
-  """The characters in the media voiced by the parent actor"""
-  characters: [Character]
-
-  """The characters role in the media"""
-  characterRole: CharacterRole
 
   """The role of the staff member in the production of the media"""
   staffRole: String
@@ -2254,7 +1972,6 @@ type MediaSubmission {
 """Media submission with comparison to current data"""
 type MediaSubmissionComparison {
   submission: MediaSubmissionEdge
-  character: MediaCharacter
   staff: StaffEdge
   studio: StudioEdge
 }
@@ -2262,11 +1979,8 @@ type MediaSubmissionComparison {
 type MediaSubmissionEdge {
   """The id of the direct submission"""
   id: Int
-  characterRole: CharacterRole
   staffRole: String
   isMain: Boolean
-  character: Character
-  characterSubmission: Character
   voiceActor: Staff
   voiceActorSubmission: Staff
   staff: Staff
@@ -2846,65 +2560,6 @@ type Mutation {
     rating: RecommendationRating
   ): Recommendation
 
-  """Create or update a forum thread"""
-  SaveThread(
-    """The thread id, required for updating"""
-    id: Int
-
-    """The title of the thread"""
-    title: String
-
-    """The main text body of the thread"""
-    body: String
-
-    """Forum categories the thread should be within"""
-    categories: [Int]
-
-    """Media related to the contents of the thread"""
-    mediaCategories: [Int]
-
-    """If the thread should be stickied. (Mod Only)"""
-    sticky: Boolean
-
-    """If the thread should be locked. (Mod Only)"""
-    locked: Boolean
-  ): Thread
-
-  """Delete a thread"""
-  DeleteThread(
-    """The id of the thread to delete"""
-    id: Int
-  ): Deleted
-
-  """Toggle the subscription of a forum thread"""
-  ToggleThreadSubscription(
-    """The id of the forum thread to un/subscribe"""
-    threadId: Int
-
-    """Whether to subscribe or unsubscribe from the forum thread"""
-    subscribe: Boolean
-  ): Thread
-
-  """Create or update a thread comment"""
-  SaveThreadComment(
-    """The comment id, required for updating"""
-    id: Int
-
-    """The id of thread the comment belongs to"""
-    threadId: Int
-
-    """The id of thread comment to reply to"""
-    parentCommentId: Int
-
-    """The comment markdown text"""
-    comment: String
-  ): ThreadComment
-
-  """Delete a thread comment"""
-  DeleteThreadComment(
-    """The id of the thread comment to delete"""
-    id: Int
-  ): Deleted
   UpdateAniChartSettings(titleLanguage: String, outgoingLinkProvider: String, theme: String, sort: String): Json
   UpdateAniChartHighlights(highlights: [AniChartHighlightInput]): Json
 }
@@ -2975,7 +2630,7 @@ enum NotificationType {
 }
 
 """Notification union type"""
-union NotificationUnion = AiringNotification | FollowingNotification | ActivityMessageNotification | ActivityMentionNotification | ActivityReplyNotification | ActivityReplySubscribedNotification | ActivityLikeNotification | ActivityReplyLikeNotification | ThreadCommentMentionNotification | ThreadCommentReplyNotification | ThreadCommentSubscribedNotification | ThreadCommentLikeNotification | ThreadLikeNotification | RelatedMediaAdditionNotification
+union NotificationUnion = AiringNotification | FollowingNotification | ActivityMessageNotification | ActivityMentionNotification | ActivityReplyNotification | ActivityReplySubscribedNotification | ActivityLikeNotification | ActivityReplyLikeNotification | RelatedMediaAdditionNotification
 
 """Page of data"""
 type Page {
@@ -3197,25 +2852,6 @@ type Page {
     """The order the results will be returned in"""
     sort: [MediaSort]
   ): [Media]
-  characters(
-    """Filter by character id"""
-    id: Int
-
-    """Filter by search query"""
-    search: String
-
-    """Filter by character id"""
-    id_not: Int
-
-    """Filter by character id"""
-    id_in: [Int]
-
-    """Filter by character id"""
-    id_not_in: [Int]
-
-    """The order the results will be returned in"""
-    sort: [CharacterSort]
-  ): [Character]
   staff(
     """Filter by the staff id"""
     id: Int
@@ -3583,47 +3219,6 @@ type Page {
     """Filter by the parent id"""
     activityId: Int
   ): [ActivityReply]
-  threads(
-    """Filter by the thread id"""
-    id: Int
-
-    """Filter by the user id of the thread's creator"""
-    userId: Int
-
-    """Filter by the user id of the last user to comment on the thread"""
-    replyUserId: Int
-
-    """Filter by if the currently authenticated user's subscribed threads"""
-    subscribed: Boolean
-
-    """Filter by thread category id"""
-    categoryId: Int
-
-    """Filter by thread media id category"""
-    mediaCategoryId: Int
-
-    """Filter by search query"""
-    search: String
-
-    """Filter by the thread id"""
-    id_in: [Int]
-
-    """The order the results will be returned in"""
-    sort: [ThreadSort]
-  ): [Thread]
-  threadComments(
-    """Filter by the comment id"""
-    id: Int
-
-    """Filter by the thread id"""
-    threadId: Int
-
-    """Filter by the user id of the comment's creator"""
-    userId: Int
-
-    """The order the results will be returned in"""
-    sort: [ThreadCommentSort]
-  ): [ThreadComment]
   reviews(
     """Filter by Review id"""
     id: Int
@@ -4052,27 +3647,6 @@ type Query {
     sort: [AiringSort]
   ): AiringSchedule
 
-  """Character query"""
-  Character(
-    """Filter by character id"""
-    id: Int
-
-    """Filter by search query"""
-    search: String
-
-    """Filter by character id"""
-    id_not: Int
-
-    """Filter by character id"""
-    id_in: [Int]
-
-    """Filter by character id"""
-    id_not_in: [Int]
-
-    """The order the results will be returned in"""
-    sort: [CharacterSort]
-  ): Character
-
   """Staff query"""
   Staff(
     """Filter by the staff id"""
@@ -4438,51 +4012,6 @@ type Query {
     sort: [UserSort]
   ): User
 
-  """Thread query"""
-  Thread(
-    """Filter by the thread id"""
-    id: Int
-
-    """Filter by the user id of the thread's creator"""
-    userId: Int
-
-    """Filter by the user id of the last user to comment on the thread"""
-    replyUserId: Int
-
-    """Filter by if the currently authenticated user's subscribed threads"""
-    subscribed: Boolean
-
-    """Filter by thread category id"""
-    categoryId: Int
-
-    """Filter by thread media id category"""
-    mediaCategoryId: Int
-
-    """Filter by search query"""
-    search: String
-
-    """Filter by the thread id"""
-    id_in: [Int]
-
-    """The order the results will be returned in"""
-    sort: [ThreadSort]
-  ): Thread
-
-  """Comment query"""
-  ThreadComment(
-    """Filter by the comment id"""
-    id: Int
-
-    """Filter by the thread id"""
-    threadId: Int
-
-    """Filter by the user id of the comment's creator"""
-    userId: Int
-
-    """The order the results will be returned in"""
-    sort: [ThreadCommentSort]
-  ): [ThreadComment]
-
   """Recommendation query"""
   Recommendation(
     """Filter by recommendation id"""
@@ -4720,9 +4249,6 @@ type RevisionHistory {
   """The media the mod feed entry references"""
   media: Media
 
-  """The character the mod feed entry references"""
-  character: Character
-
   """The staff member the mod feed entry references"""
   staff: Staff
 
@@ -4906,16 +4432,6 @@ type Staff {
     perPage: Int
   ): MediaConnection
 
-  """Characters voiced by the actor"""
-  characters(
-    sort: [CharacterSort]
-
-    """The page"""
-    page: Int
-
-    """The amount of entries per page, max 25"""
-    perPage: Int
-  ): CharacterConnection
   updatedAt: Int @deprecated(reason: "No data available")
 
   """Staff member that the submission is referencing"""
@@ -5231,312 +4747,6 @@ type TextActivity {
 
   """The users who liked the activity"""
   likes: [User]
-}
-
-"""Forum Thread"""
-type Thread {
-  """The id of the thread"""
-  id: Int!
-
-  """The title of the thread"""
-  title: String
-
-  """The text body of the thread (Markdown)"""
-  body(
-    """Return the string in pre-parsed html instead of markdown"""
-    asHtml: Boolean
-  ): String
-
-  """The id of the thread owner user"""
-  userId: Int!
-
-  """The id of the user who most recently commented on the thread"""
-  replyUserId: Int
-
-  """The id of the most recent comment on the thread"""
-  replyCommentId: Int
-
-  """The number of comments on the thread"""
-  replyCount: Int
-
-  """The number of times users have viewed the thread"""
-  viewCount: Int
-
-  """If the thread is locked and can receive comments"""
-  isLocked: Boolean
-
-  """
-  If the thread is stickied and should be displayed at the top of the page
-  """
-  isSticky: Boolean
-
-  """If the currently authenticated user is subscribed to the thread"""
-  isSubscribed: Boolean
-
-  """The amount of likes the thread has"""
-  likeCount: Int!
-
-  """If the currently authenticated user liked the thread"""
-  isLiked: Boolean
-
-  """The time of the last reply"""
-  repliedAt: Int
-
-  """The time of the thread creation"""
-  createdAt: Int!
-
-  """The time of the thread last update"""
-  updatedAt: Int!
-
-  """The owner of the thread"""
-  user: User
-
-  """The user to last reply to the thread"""
-  replyUser: User
-
-  """The users who liked the thread"""
-  likes: [User]
-
-  """The url for the thread page on the AniList website"""
-  siteUrl: String
-
-  """The categories of the thread"""
-  categories: [ThreadCategory]
-
-  """The media categories of the thread"""
-  mediaCategories: [Media]
-}
-
-"""A forum thread category"""
-type ThreadCategory {
-  """The id of the category"""
-  id: Int!
-
-  """The name of the category"""
-  name: String!
-}
-
-"""Forum Thread Comment"""
-type ThreadComment {
-  """The id of the comment"""
-  id: Int!
-
-  """The user id of the comment's owner"""
-  userId: Int
-
-  """The id of thread the comment belongs to"""
-  threadId: Int
-
-  """The text content of the comment (Markdown)"""
-  comment(
-    """Return the string in pre-parsed html instead of markdown"""
-    asHtml: Boolean
-  ): String
-
-  """The amount of likes the comment has"""
-  likeCount: Int!
-
-  """If the currently authenticated user liked the comment"""
-  isLiked: Boolean
-
-  """The url for the comment page on the AniList website"""
-  siteUrl: String
-
-  """The time of the comments creation"""
-  createdAt: Int!
-
-  """The time of the comments last update"""
-  updatedAt: Int!
-
-  """The thread the comment belongs to"""
-  thread: Thread
-
-  """The user who created the comment"""
-  user: User
-
-  """The users who liked the comment"""
-  likes: [User]
-
-  """The comment's child reply comments"""
-  childComments: Json
-}
-
-"""Notification for when a thread comment is liked"""
-type ThreadCommentLikeNotification {
-  """The id of the Notification"""
-  id: Int!
-
-  """The id of the user who liked to the activity"""
-  userId: Int!
-
-  """The type of notification"""
-  type: NotificationType
-
-  """The id of the activity which was liked"""
-  commentId: Int!
-
-  """The notification context text"""
-  context: String
-
-  """The time the notification was created at"""
-  createdAt: Int
-
-  """The thread that the relevant comment belongs to"""
-  thread: Thread
-
-  """The thread comment that was liked"""
-  comment: ThreadComment
-
-  """The user who liked the activity"""
-  user: User
-}
-
-"""
-Notification for when authenticated user is @ mentioned in a forum thread comment
-"""
-type ThreadCommentMentionNotification {
-  """The id of the Notification"""
-  id: Int!
-
-  """The id of the user who mentioned the authenticated user"""
-  userId: Int!
-
-  """The type of notification"""
-  type: NotificationType
-
-  """The id of the comment where mentioned"""
-  commentId: Int!
-
-  """The notification context text"""
-  context: String
-
-  """The time the notification was created at"""
-  createdAt: Int
-
-  """The thread that the relevant comment belongs to"""
-  thread: Thread
-
-  """The thread comment that included the @ mention"""
-  comment: ThreadComment
-
-  """The user who mentioned the authenticated user"""
-  user: User
-}
-
-"""Notification for when a user replies to your forum thread comment"""
-type ThreadCommentReplyNotification {
-  """The id of the Notification"""
-  id: Int!
-
-  """The id of the user who create the comment reply"""
-  userId: Int!
-
-  """The type of notification"""
-  type: NotificationType
-
-  """The id of the reply comment"""
-  commentId: Int!
-
-  """The notification context text"""
-  context: String
-
-  """The time the notification was created at"""
-  createdAt: Int
-
-  """The thread that the relevant comment belongs to"""
-  thread: Thread
-
-  """The reply thread comment"""
-  comment: ThreadComment
-
-  """The user who replied to the activity"""
-  user: User
-}
-
-"""Thread comments sort enums"""
-enum ThreadCommentSort {
-  ID
-  ID_DESC
-}
-
-"""Notification for when a user replies to a subscribed forum thread"""
-type ThreadCommentSubscribedNotification {
-  """The id of the Notification"""
-  id: Int!
-
-  """The id of the user who commented on the thread"""
-  userId: Int!
-
-  """The type of notification"""
-  type: NotificationType
-
-  """The id of the new comment in the subscribed thread"""
-  commentId: Int!
-
-  """The notification context text"""
-  context: String
-
-  """The time the notification was created at"""
-  createdAt: Int
-
-  """The thread that the relevant comment belongs to"""
-  thread: Thread
-
-  """The reply thread comment"""
-  comment: ThreadComment
-
-  """The user who replied to the subscribed thread"""
-  user: User
-}
-
-"""Notification for when a thread is liked"""
-type ThreadLikeNotification {
-  """The id of the Notification"""
-  id: Int!
-
-  """The id of the user who liked to the activity"""
-  userId: Int!
-
-  """The type of notification"""
-  type: NotificationType
-
-  """The id of the thread which was liked"""
-  threadId: Int!
-
-  """The notification context text"""
-  context: String
-
-  """The time the notification was created at"""
-  createdAt: Int
-
-  """The thread that the relevant comment belongs to"""
-  thread: Thread
-
-  """The liked thread comment"""
-  comment: ThreadComment
-
-  """The user who liked the activity"""
-  user: User
-}
-
-"""Thread sort enums"""
-enum ThreadSort {
-  ID
-  ID_DESC
-  TITLE
-  TITLE_DESC
-  CREATED_AT
-  CREATED_AT_DESC
-  UPDATED_AT
-  UPDATED_AT_DESC
-  REPLIED_AT
-  REPLIED_AT_DESC
-  REPLY_COUNT
-  REPLY_COUNT_DESC
-  VIEW_COUNT
-  VIEW_COUNT_DESC
-  IS_STICKY
-  SEARCH_MATCH
 }
 
 """A user"""

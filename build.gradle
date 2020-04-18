@@ -29,6 +29,9 @@ javafx {
 
 sourceSets {
     main {
+        java {
+            srcDirs = ['src/main/java', "$buildDir/generated/graphql"]
+        }
         resources {
             srcDirs = ['src/main/resources']
             include '**/*'
@@ -36,17 +39,16 @@ sourceSets {
     }
 }
 
-sourceSets.main.java.srcDirs '$buildDir/generated/graphql'
 compileJava.dependsOn 'graphqlCodegen'
 
 graphqlCodegen {
-    graphqlSchemaPaths = ['$projectDir/src/main/resources/schema.graphql'.toString()]
-    outputDir = new File('$buildDir/generated/graphql')
-    modelPackageName = 'com.manulaiko.shinshinjiru.api.model'
+    graphqlSchemaPaths = ["$projectDir/src/main/resources/schema.graphql".toString()]
+    outputDir = new File("$buildDir/generated/graphql")
+    modelPackageName = 'com.manulaiko.shinshinjiru.api.model.dto'
+    packageName = 'com.manulaiko.shinshinjiru.api.model'
     customTypesMapping = [
             DateTime: 'java.util.Date'
     ]
-    modelNameSuffix = 'TO'
     generateRequests = true
     generateApis = false
 }

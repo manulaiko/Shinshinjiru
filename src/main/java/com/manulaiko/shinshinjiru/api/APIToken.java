@@ -1,6 +1,7 @@
 package com.manulaiko.shinshinjiru.api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 import lombok.Getter;
 
 /**
@@ -11,7 +12,7 @@ import lombok.Getter;
  *
  * @author Manulaiko <manulaiko@gmail.com>
  */
-@Getter
+@Data
 public class APIToken {
     @JsonProperty("token_type")
     private String tokenType;
