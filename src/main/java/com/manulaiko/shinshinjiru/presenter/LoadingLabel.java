@@ -9,23 +9,21 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 
 /**
- * Loading screen presenter.
- * =========================
+ * Loading label presenter.
+ * ========================
  *
- * Handles the loading screen logic.
+ * Handles the rotation of the loading label.
  *
  * @author Manulaiko <manulaiko@gmail.com>
  */
 @Controller
 @Slf4j
-public class LoadingScreen {
+public class LoadingLabel {
     @FXML
     private Label loading;
 

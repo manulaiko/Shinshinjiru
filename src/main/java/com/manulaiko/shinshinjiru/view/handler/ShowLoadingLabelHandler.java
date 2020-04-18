@@ -1,23 +1,23 @@
 package com.manulaiko.shinshinjiru.view.handler;
 
 import com.manulaiko.shinshinjiru.view.SceneManager;
-import com.manulaiko.shinshinjiru.view.event.InitLoadingScreenEvent;
+import com.manulaiko.shinshinjiru.view.event.ShowLoadingLabelEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
 /**
- * Init loading screen handler.
- * ============================
+ * Show loading label handler.
+ * ===========================
  *
- * Initializes the loading screen.
+ * Shows the loading label.
  *
  * @author Manulaiko <manulaiko@gmail.com>
  */
 @Component
 @Slf4j
-public class InitLoadingScreenHandler implements ApplicationListener<InitLoadingScreenEvent> {
+public class ShowLoadingLabelHandler implements ApplicationListener<ShowLoadingLabelEvent> {
     @Autowired
     private SceneManager sceneManager;
 
@@ -25,9 +25,9 @@ public class InitLoadingScreenHandler implements ApplicationListener<InitLoading
      * @inheritDoc
      */
     @Override
-    public void onApplicationEvent(InitLoadingScreenEvent event) {
-        log.info("Loading LoadingScreen...");
+    public void onApplicationEvent(ShowLoadingLabelEvent event) {
+        log.info("Loading...");
         sceneManager.show();
-        sceneManager.show("LoadingScreen.fxml");
+        sceneManager.show("LoadingLabel.fxml");
     }
 }

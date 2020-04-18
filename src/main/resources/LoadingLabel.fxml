@@ -2,7 +2,7 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.text.Font?>
-<Label fx:controller="com.manulaiko.shinshinjiru.presenter.LoadingScreen"
+<Label fx:controller="com.manulaiko.shinshinjiru.presenter.LoadingLabel"
        fx:id="loading"
        style="-fx-font-weight: bold; -fx-font-size: 32; -fx-background-color: #272c38;"
        text="ʕ •ᴥ•ʔ"

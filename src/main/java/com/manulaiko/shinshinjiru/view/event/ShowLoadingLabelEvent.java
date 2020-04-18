@@ -3,18 +3,18 @@ package com.manulaiko.shinshinjiru.view.event;
 import org.springframework.context.ApplicationEvent;
 
 /**
- * Init loading screen event.
- * ==========================
+ * Show loading label event.
+ * =========================
  *
- * Event fired to initialize the loading screen.
+ * Event fired when the application must show the loading label.
  *
  * @author Manulaiko <manulaiko@gmail.com>
  */
-public class InitLoadingScreenEvent extends ApplicationEvent {
+public class ShowLoadingLabelEvent extends ApplicationEvent {
     /**
      * Constructor.
      */
-    public InitLoadingScreenEvent() {
+    public ShowLoadingLabelEvent() {
         super(new Object());
     }
 }
