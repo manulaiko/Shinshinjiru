@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.2.6.RELEASE'
     id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'org.openjfx.javafxplugin' version '0.0.8'
+    id 'io.github.kobylynskyi.graphql.codegen' version '1.6.0'
     id 'java'
     id 'application'
 }
@@ -9,7 +10,7 @@ plugins {
 group = 'com.manulaiko'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '14'
-mainClassName = 'shinshinjiru.main/com.manulaiko.shinshinjiru.ShinshinjiruApplication'
+mainClassName = 'com.manulaiko.shinshinjiru.ShinshinjiruApplication'
 
 configurations {
     compileOnly {
@@ -35,14 +36,32 @@ sourceSets {
     }
 }
 
+sourceSets.main.java.srcDirs '$buildDir/generated/graphql'
+compileJava.dependsOn 'graphqlCodegen'
+
+graphqlCodegen {
+    graphqlSchemaPaths = ['$projectDir/src/main/resources/schema.graphql'.toString()]
+    outputDir = new File('$buildDir/generated/graphql')
+    modelPackageName = 'com.manulaiko.shinshinjiru.api.model'
+    customTypesMapping = [
+            DateTime: 'java.util.Date'
+    ]
+    modelNameSuffix = 'TO'
+    generateRequests = true
+    generateApis = false
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
     implementation 'org.projectlombok:lombok:1.18.12'
     annotationProcessor 'org.projectlombok:lombok:1.18.12'
+    implementation 'org.mapstruct:mapstruct:1.3.0.Final'
     implementation 'org.mapstruct:mapstruct-processor:1.3.1.Final'
     implementation 'org.jfxtras:jfxtras-controls:10.0-r1'
+
+    compile 'io.github.kobylynskyi:graphql-java-codegen:1.6.0'
 }
 
 test {

@@ -18,3 +18,6 @@ oauth:
     client-id: 3310
     redirect-uri: http://localhost:${oauth.port}${oauth.endpoint}
     client-secret: zP4dlV02hPyhAMRznt69loaMovx2hcjiGVcLhXfF
+
+api:
+  url: https://graphql.anilist.co/
