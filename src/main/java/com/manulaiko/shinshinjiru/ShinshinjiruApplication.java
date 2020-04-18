@@ -79,6 +79,7 @@ public class ShinshinjiruApplication extends Application {
     public void start(Stage stage) {
         var sceneManager = applicationContext.getBean(SceneManager.class);
         sceneManager.setRootStage(stage);
+        sceneManager.setRootScene("MainLayout.fxml");
 
         applicationContext.publishEvent(new InitLoadingScreenEvent());
     }

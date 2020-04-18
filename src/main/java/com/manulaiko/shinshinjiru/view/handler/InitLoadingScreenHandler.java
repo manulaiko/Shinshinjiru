@@ -27,6 +27,7 @@ public class InitLoadingScreenHandler implements ApplicationListener<InitLoading
     @Override
     public void onApplicationEvent(InitLoadingScreenEvent event) {
         log.info("Loading LoadingScreen...");
+        sceneManager.show();
         sceneManager.show("LoadingScreen.fxml");
     }
 }

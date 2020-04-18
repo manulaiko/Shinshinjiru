@@ -3,6 +3,9 @@ package com.manulaiko.shinshinjiru.view;
 import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.SubScene;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +30,25 @@ public class SceneManager {
     private final Map<String, Scene> scenes = new HashMap<>();
 
     private Stage rootStage;
+    private String rootScene;
+
+    /**
+     * Shows the window with the root scene.
+     */
+    public void show() {
+        Platform.runLater(this::doShow);
+    }
+
+    /**
+     * Shows the root scene in the FX thread.
+     */
+    private void doShow() {
+        var scene = scenes.computeIfAbsent(this.getRootScene(), this::buildScene);
+
+        log.debug("Showing root scene...");
+        this.getRootStage().setScene(scene);
+        this.getRootStage().show();
+    }
 
     /**
      * Switch to the given scene.
@@ -43,11 +65,13 @@ public class SceneManager {
      * @param fxml Scene's fxml to switch the stage to.
      */
     private void doShow(String fxml) {
-        var scene = scenes.computeIfAbsent(fxml, this::buildScene);
+        var subScene = scenes.computeIfAbsent(fxml, this::buildScene);
 
-        log.debug("Showing scene for " + scene);
-        this.getRootStage().setScene(scene);
-        this.getRootStage().show();
+        log.debug("Showing scene for " + subScene);
+
+        var scene = this.getRootStage().getScene();
+        var root = (BorderPane)scene.getRoot();
+        root.setCenter(subScene.getRoot());
     }
 
     /**
@@ -63,7 +87,10 @@ public class SceneManager {
             var loader = new ContextAwareFXMLLoader(fxml);
             var parent = (Parent) loader.load();
 
-            return new Scene(parent);
+            var scene = new Scene(parent);
+            scene.setUserData(loader.getController());
+
+            return scene;
         } catch (IOException e) {
             log.warn("Couldn't load scene!", e);
 

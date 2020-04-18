@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-
-<AnchorPane prefHeight="217.0" prefWidth="635.0" style="-fx-background-color: #272c38;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manulaiko.shinshinjiru.presenter.LoadingScreen">
-   <children>
-      <Text fill="#3db4f2" layoutX="176.0" layoutY="61.0" stroke="#ff73e5" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="ShinShinjiru" textAlignment="CENTER">
-         <font>
-            <Font name="OpenSymbol" size="48.0" />
-         </font>
-      </Text>
-      <Label fx:id="loading" layoutX="278.0" layoutY="109.0" style="-fx-font-weight: bold; -fx-font-size: 32;" text="ʕ •ᴥ•ʔ" textFill="#a6a7b2">
-         <font>
-            <Font size="32.0" />
-         </font>
-      </Label>
-   </children>
-</AnchorPane>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.text.Font?>
+<Label fx:controller="com.manulaiko.shinshinjiru.presenter.LoadingScreen"
+       fx:id="loading"
+       style="-fx-font-weight: bold; -fx-font-size: 32; -fx-background-color: #272c38;"
+       text="ʕ •ᴥ•ʔ"
+       textFill="#a6a7b2"
+       xmlns="http://javafx.com/javafx/10.0.2-internal"
+       xmlns:fx="http://javafx.com/fxml/1">
+    <font>
+        <Font size="32.0"/>
+    </font>
+</Label>
