@@ -3,7 +3,7 @@ package com.manulaiko.shinshinjiru.oauth;
 import com.manulaiko.shinshinjiru.ShinshinjiruApplication;
 import com.manulaiko.shinshinjiru.api.APIService;
 import com.manulaiko.shinshinjiru.api.APIToken;
-import com.manulaiko.shinshinjiru.view.event.InitMainScreenEvent;
+import com.manulaiko.shinshinjiru.oauth.event.StopOauthServerEvent;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import lombok.extern.slf4j.Slf4j;
@@ -30,9 +30,6 @@ public class OAuthCallback implements HttpHandler {
 
     @Value("${oauth.message}")
     private String message;
-
-    @Autowired
-    private OAuthServer server;
 
     @Autowired
     private APIService service;
@@ -66,7 +63,6 @@ public class OAuthCallback implements HttpHandler {
         out.flush();
         out.close();
 
-        server.stop();
-        ShinshinjiruApplication.publish(new InitMainScreenEvent());
+        ShinshinjiruApplication.publish(new StopOauthServerEvent());
     }
 }

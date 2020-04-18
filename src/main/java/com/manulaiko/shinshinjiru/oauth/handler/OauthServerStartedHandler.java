@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class OauthServerStartedHandler implements ApplicationListener<OauthServerStartedEvent> {
-    @Value("{oauth.open-url}")
+    @Value("${oauth.open-url}")
     private String openUrl;
 
     /**

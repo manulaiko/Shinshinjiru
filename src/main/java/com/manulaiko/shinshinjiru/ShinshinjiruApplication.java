@@ -1,6 +1,7 @@
 package com.manulaiko.shinshinjiru;
 
 import com.manulaiko.shinshinjiru.view.SceneManager;
+import com.manulaiko.shinshinjiru.view.event.InitMainScreenEvent;
 import com.manulaiko.shinshinjiru.view.event.ShowLoadingLabelEvent;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -81,7 +82,7 @@ public class ShinshinjiruApplication extends Application {
         sceneManager.setRootStage(stage);
         sceneManager.setRootScene("MainLayout.fxml");
 
-        applicationContext.publishEvent(new ShowLoadingLabelEvent());
+        applicationContext.publishEvent(new InitMainScreenEvent());
     }
 
     /**

@@ -29,5 +29,7 @@ module shinshinjiru.main {
     opens com.manulaiko.shinshinjiru.view.event;
     opens com.manulaiko.shinshinjiru.view.handler;
     opens com.manulaiko.shinshinjiru.oauth;
+    opens com.manulaiko.shinshinjiru.oauth.event;
+    opens com.manulaiko.shinshinjiru.oauth.handler;
     opens com.manulaiko.shinshinjiru.api;
 }

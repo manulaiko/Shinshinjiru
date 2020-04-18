@@ -1,7 +1,10 @@
 package com.manulaiko.shinshinjiru.view.handler;
 
+import com.manulaiko.shinshinjiru.ShinshinjiruApplication;
+import com.manulaiko.shinshinjiru.oauth.event.StartOauthServerEvent;
 import com.manulaiko.shinshinjiru.view.SceneManager;
 import com.manulaiko.shinshinjiru.view.event.InitMainScreenEvent;
+import com.manulaiko.shinshinjiru.view.event.ShowLoadingLabelEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -27,6 +30,12 @@ public class InitMainScreenHandler implements ApplicationListener<InitMainScreen
     @Override
     public void onApplicationEvent(InitMainScreenEvent event) {
         log.info("Loading MainScreen...");
-        sceneManager.show("MainLayout.fxml");
+        sceneManager.show();
+
+        // Show loading
+        ShinshinjiruApplication.publish(new ShowLoadingLabelEvent());
+
+        // Start OAuth server
+        ShinshinjiruApplication.publish(new StartOauthServerEvent());
     }
 }

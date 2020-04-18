@@ -1,5 +1,7 @@
 package com.manulaiko.shinshinjiru.oauth;
 
+import com.manulaiko.shinshinjiru.ShinshinjiruApplication;
+import com.manulaiko.shinshinjiru.oauth.event.OauthServerStartedEvent;
 import com.sun.net.httpserver.HttpServer;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -44,6 +46,8 @@ public class OAuthServer {
 
         server.start();
         log.debug("OAuthServer started at port " + port);
+
+        ShinshinjiruApplication.publish(new OauthServerStartedEvent());
     }
 
     /**
