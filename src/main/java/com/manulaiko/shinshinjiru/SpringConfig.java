@@ -1,5 +1,6 @@
 package com.manulaiko.shinshinjiru;
 
+import com.manulaiko.shinshinjiru.util.MegaApplicationEventMulticaster;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.ApplicationEventMulticaster;
@@ -23,8 +24,12 @@ public class SpringConfig {
      */
     @Bean(name = "applicationEventMulticaster")
     public ApplicationEventMulticaster eventMulticaster() {
-        var eventMulticaster = new SimpleApplicationEventMulticaster();
-        eventMulticaster.setTaskExecutor(new SimpleAsyncTaskExecutor());
+        var eventMulticaster = new MegaApplicationEventMulticaster();
+        var asyncMulticaster = new SimpleApplicationEventMulticaster();
+        asyncMulticaster.setTaskExecutor(new SimpleAsyncTaskExecutor());
+
+        eventMulticaster.setAsyncEventMulticaster(asyncMulticaster);
+        eventMulticaster.setSyncEventMulticaster(new SimpleApplicationEventMulticaster());
 
         return eventMulticaster;
     }
