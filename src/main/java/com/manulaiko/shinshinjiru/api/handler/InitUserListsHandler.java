@@ -76,9 +76,9 @@ public class InitUserListsHandler implements ApplicationListener<InitUserListsEv
                                                                         .id()
                                                                         .title(
                                                                                 new MediaTitleResponseProjection()
-                                                                                        .english()
-                                                                                        .romaji()
+                                                                                        .userPreferred()
                                                                         )
+                                                                        .averageScore()
                                                                         .description()
                                                                         .format()
                                                                         .status()
