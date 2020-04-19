@@ -88,6 +88,7 @@ public class SceneManager {
             var parent = (Parent) loader.load();
 
             var scene = new Scene(parent);
+            scene.getStylesheets().add("dark.css");
             scene.setUserData(loader.getController());
 
             return scene;

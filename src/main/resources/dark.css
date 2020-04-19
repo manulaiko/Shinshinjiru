@@ -1,0 +1,39 @@
+* {
+    textColor: #cdcdcd;
+    darkColor: #1f2631;
+    lightColor: #272c38;
+
+    -fx-text-fill: textColor;
+    -fx-background-color: transparent;
+}
+
+#menu, .tab-header-background {
+    -fx-background-color: darkColor;
+}
+
+BorderPane, .tab, .control-buttons-tab, .tab-header {
+    -fx-background-color: lightColor;
+}
+
+.arrow, .thumb, .increment-arrow, .decrement-arrow {
+    -fx-background-color: textColor;
+}
+
+#menu > Button {
+    -fx-cursor: hand;
+}
+
+#loading {
+    -fx-background-color: lightcolor;
+    -fx-text-fill: #a6a7b2;
+    -fx-font-weight: bold;
+    -fx-font-size: 32;
+}
+
+.table-row-cell :even {
+    -fx-background-color: darkColor;
+}
+
+.menu-item {
+    -fx-background-color: lightColor;
+}

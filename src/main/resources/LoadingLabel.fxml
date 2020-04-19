@@ -4,9 +4,7 @@
 <?import javafx.scene.text.Font?>
 <Label fx:controller="com.manulaiko.shinshinjiru.presenter.LoadingLabel"
        fx:id="loading"
-       style="-fx-font-weight: bold; -fx-font-size: 32; -fx-background-color: #272c38;"
        text="ʕ •ᴥ•ʔ"
-       textFill="#a6a7b2"
        xmlns="http://javafx.com/javafx/10.0.2-internal"
        xmlns:fx="http://javafx.com/fxml/1">
     <font>
