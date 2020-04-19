@@ -44,6 +44,7 @@ public class SceneManager {
      */
     private void doShow() {
         var scene = scenes.computeIfAbsent(this.getRootScene(), this::buildScene);
+        scene.getStylesheets().addAll("dark.css");
 
         log.debug("Showing root scene...");
         this.getRootStage().setScene(scene);
@@ -67,7 +68,7 @@ public class SceneManager {
     private void doShow(String fxml) {
         var subScene = scenes.computeIfAbsent(fxml, this::buildScene);
 
-        log.debug("Showing scene for " + subScene);
+        log.debug("Showing scene for " + fxml + " ("+ subScene +")");
 
         var scene = this.getRootStage().getScene();
         var root = (BorderPane)scene.getRoot();
@@ -88,7 +89,6 @@ public class SceneManager {
             var parent = (Parent) loader.load();
 
             var scene = new Scene(parent);
-            scene.getStylesheets().add("dark.css");
             scene.setUserData(loader.getController());
 
             return scene;

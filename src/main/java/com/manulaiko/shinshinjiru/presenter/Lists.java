@@ -50,7 +50,7 @@ public class Lists {
                         .map(this::loadList)
                         .collect(Collectors.toList());
 
-        Platform.runLater(() -> this.lists.getTabs().addAll(tabs));
+        this.lists.getTabs().addAll(tabs);
     }
 
     /**
