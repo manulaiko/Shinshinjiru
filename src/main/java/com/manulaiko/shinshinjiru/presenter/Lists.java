@@ -1,7 +1,6 @@
 package com.manulaiko.shinshinjiru.presenter;
 
 import com.manulaiko.shinshinjiru.api.AniList;
-import com.manulaiko.shinshinjiru.api.model.dto.MediaList;
 import com.manulaiko.shinshinjiru.api.model.dto.MediaListGroup;
 import com.manulaiko.shinshinjiru.presenter.lists.TableEntry;
 import javafx.application.Platform;
@@ -17,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -46,12 +45,12 @@ public class Lists {
 
         var lists = anilist.getLists();
 
-        lists.getLists()
-             .forEach(
-                     l -> Platform.runLater(
-                             () -> loadList(l)
-                     )
-             );
+        var tabs = lists.getLists()
+                        .stream()
+                        .map(this::loadList)
+                        .collect(Collectors.toList());
+
+        Platform.runLater(() -> this.lists.getTabs().addAll(tabs));
     }
 
     /**
@@ -59,13 +58,18 @@ public class Lists {
      *
      * @param list List to load.
      */
-    private void loadList(MediaListGroup list) {
+    private Tab loadList(MediaListGroup list) {
+        var entries = list.getEntries()
+                          .stream()
+                          .map(TableEntry::new)
+                          .collect(Collectors.toList());
+
         var tab = new Tab();
         tab.setText(list.getName());
 
-        tab.setContent(this.buildList(list));
+        tab.setContent(this.buildList(list, entries));
 
-        lists.getTabs().add(tab);
+        return tab;
     }
 
     /**
@@ -75,16 +79,11 @@ public class Lists {
      *
      * @return List table.
      */
-    private Node buildList(MediaListGroup entries) {
+    private Node buildList(MediaListGroup entries, List<TableEntry> parsedEntries) {
         log.debug("Building table for " + entries.getName());
 
         var table = new TableView<TableEntry>();
-        var data = FXCollections.observableList(
-                entries.getEntries()
-                       .stream()
-                       .map(TableEntry::new)
-                       .collect(Collectors.toList())
-        );
+        var data  = FXCollections.observableList(parsedEntries);
 
         // Build columns
         var name = new TableColumn<TableEntry, String>("Name");
@@ -94,8 +93,13 @@ public class Lists {
         var score = new TableColumn<TableEntry, String>("Score");
         score.setCellValueFactory(new PropertyValueFactory<>("score"));
 
+        name.prefWidthProperty().bind(table.widthProperty().multiply(.75));
+        progress.prefWidthProperty().bind(table.widthProperty().multiply(.124));
+        score.prefWidthProperty().bind(table.widthProperty().multiply(.124));
+
         table.getColumns().addAll(name, progress, score);
         table.setItems(data);
+        table.setPrefSize(960, 450);
 
         return table;
     }
