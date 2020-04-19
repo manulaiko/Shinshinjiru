@@ -40,7 +40,7 @@ public class APIService {
      *
      * @return Query result.
      */
-    public <T> Map<String, T> query(GraphQLRequest query, Class<T> type) {
+    public <T extends GraphQLResult<?>> T query(GraphQLRequest query, Class<T> type) {
         var request = query.toString();
         var headers = new HttpHeaders();
 
@@ -54,14 +54,13 @@ public class APIService {
                 URI.create(url),
                 HttpMethod.POST,
                 entity,
-                new ParameterizedTypeReference<GraphQLResult<Map<String, T>>>() {
-                }
+                type
         ).getBody();
 
         if (result.hasErrors()) {
             throw new RuntimeException(result.getErrors().get(0).getMessage());
         }
 
-        return result.getData();
+        return result;
     }
 }
