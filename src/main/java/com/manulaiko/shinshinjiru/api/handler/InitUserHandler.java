@@ -1,8 +1,10 @@
 package com.manulaiko.shinshinjiru.api.handler;
 
 import com.kobylynskyi.graphql.codegen.model.graphql.GraphQLRequest;
+import com.manulaiko.shinshinjiru.ShinshinjiruApplication;
 import com.manulaiko.shinshinjiru.api.APIService;
 import com.manulaiko.shinshinjiru.api.event.InitUserEvent;
+import com.manulaiko.shinshinjiru.api.event.UserInitializedEvent;
 import com.manulaiko.shinshinjiru.api.model.dto.*;
 import com.manulaiko.shinshinjiru.api.query.Viewer;
 import lombok.extern.slf4j.Slf4j;
@@ -47,7 +49,6 @@ public class InitUserHandler implements ApplicationListener<InitUserEvent> {
         );
 
         var result = api.query(request, Viewer.class);
-
-        log.info("ViewerQueryRequest result " + result);
+        ShinshinjiruApplication.publish(new UserInitializedEvent(this, result.getData().get("Viewer")));
     }
 }
