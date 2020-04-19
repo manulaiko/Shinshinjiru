@@ -3,6 +3,7 @@ package com.manulaiko.shinshinjiru.oauth;
 import com.manulaiko.shinshinjiru.ShinshinjiruApplication;
 import com.manulaiko.shinshinjiru.api.APIService;
 import com.manulaiko.shinshinjiru.api.APIToken;
+import com.manulaiko.shinshinjiru.api.event.InitUserEvent;
 import com.manulaiko.shinshinjiru.oauth.event.StopOauthServerEvent;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -55,7 +56,8 @@ public class OAuthCallback implements HttpHandler {
         log.info("Executing AuthToken request...");
         var response = restTemplate.postForObject(url, request, APIToken.class);
         service.setToken(response);
-        log.info("AuthToken received: " + response);
+        log.debug("AuthToken received: " + response);
+        ShinshinjiruApplication.publish(new InitUserEvent(this));
 
         httpExchange.sendResponseHeaders(200, message.length());
         var out = httpExchange.getResponseBody();
