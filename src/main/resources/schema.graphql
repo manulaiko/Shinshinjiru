@@ -1540,10 +1540,7 @@ type MediaList {
   status: MediaListStatus
 
   """The score of the entry"""
-  score(
-    """Force the score to be returned in the provided format type."""
-    format: ScoreFormat
-  ): Float
+  score: Float
 
   """The amount of episodes/chapters consumed by the user"""
   progress: Int
@@ -2019,10 +2016,10 @@ type MediaTag {
 """The official titles of the media in various languages"""
 type MediaTitle {
   """The romanization of the native language title"""
-  romaji(stylised: Boolean): String
+  romaji: String
 
   """The official english title"""
-  english(stylised: Boolean): String
+  english: String
 
   """
   The currently authenticated users preferred title language. Default romaji for non-authenticated
