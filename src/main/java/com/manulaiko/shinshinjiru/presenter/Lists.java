@@ -2,22 +2,13 @@ package com.manulaiko.shinshinjiru.presenter;
 
 import com.manulaiko.shinshinjiru.api.AniList;
 import com.manulaiko.shinshinjiru.api.model.dto.MediaListGroup;
-import com.manulaiko.shinshinjiru.presenter.lists.TableEntry;
-import javafx.application.Platform;
-import javafx.collections.FXCollections;
+import com.manulaiko.shinshinjiru.presenter.lists.TableList;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Lists presenter.
@@ -42,15 +33,13 @@ public class Lists {
     @FXML
     public void initialize() {
         log.debug("Loading List entries...");
+        var tabs = lists.getTabs();
 
-        var lists = anilist.getLists();
-
-        var tabs = lists.getLists()
-                        .stream()
-                        .map(this::loadList)
-                        .collect(Collectors.toList());
-
-        this.lists.getTabs().addAll(tabs);
+        anilist.getLists()
+               .getLists()
+               .stream()
+               .map(this::loadList)
+               .forEach(tabs::add);
     }
 
     /**
@@ -59,48 +48,12 @@ public class Lists {
      * @param list List to load.
      */
     private Tab loadList(MediaListGroup list) {
-        var entries = list.getEntries()
-                          .stream()
-                          .map(TableEntry::new)
-                          .collect(Collectors.toList());
-
+        log.debug("Building table for " + list.getName());
         var tab = new Tab();
-        tab.setText(list.getName());
 
-        tab.setContent(this.buildList(list, entries));
+        tab.setText(list.getName());
+        tab.setContent(new TableList().initialize(list));
 
         return tab;
-    }
-
-    /**
-     * Builds the list table.
-     *
-     * @param entries Entries to populate the table.
-     *
-     * @return List table.
-     */
-    private Node buildList(MediaListGroup entries, List<TableEntry> parsedEntries) {
-        log.debug("Building table for " + entries.getName());
-
-        var table = new TableView<TableEntry>();
-        var data  = FXCollections.observableList(parsedEntries);
-
-        // Build columns
-        var name = new TableColumn<TableEntry, String>("Name");
-        name.setCellValueFactory(new PropertyValueFactory<>("name"));
-        var progress = new TableColumn<TableEntry, String>("Progress");
-        progress.setCellValueFactory(new PropertyValueFactory<>("progress"));
-        var score = new TableColumn<TableEntry, String>("Score");
-        score.setCellValueFactory(new PropertyValueFactory<>("score"));
-
-        name.prefWidthProperty().bind(table.widthProperty().multiply(.75));
-        progress.prefWidthProperty().bind(table.widthProperty().multiply(.124));
-        score.prefWidthProperty().bind(table.widthProperty().multiply(.124));
-
-        table.getColumns().addAll(name, progress, score);
-        table.setItems(data);
-        table.setPrefSize(960, 450);
-
-        return table;
     }
 }
