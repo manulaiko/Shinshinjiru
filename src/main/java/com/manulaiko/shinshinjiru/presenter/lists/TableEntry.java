@@ -14,27 +14,30 @@ import lombok.Data;
  */
 @Data
 public class TableEntry {
-    private SimpleStringProperty name;
-    private SimpleStringProperty progress;
-    private SimpleStringProperty score;
+    private final SimpleStringProperty name;
+    private final SimpleStringProperty progress;
+    private final SimpleStringProperty score;
+    private final MediaList entry;
 
     public TableEntry(MediaList entry) {
-        name = new SimpleStringProperty(entry.getMedia().getTitle().getUserPreferred());
-        progress = new SimpleStringProperty(
+        this.name = new SimpleStringProperty(entry.getMedia().getTitle().getUserPreferred());
+        this.progress = new SimpleStringProperty(
                 entry.getProgress() + "/" + entry.getMedia().getEpisodes()
         );
-        score = new SimpleStringProperty(entry.getScore() +" (avg: "+ entry.getMedia().getAverageScore() +")");
+        this.score = new SimpleStringProperty(entry.getScore() +" (avg: "+ entry.getMedia().getAverageScore() +")");
+
+        this.entry = entry;
     }
 
     public String getName() {
-        return name.get();
+        return this.name.get();
     }
 
     public String getProgress() {
-        return progress.get();
+        return this.progress.get();
     }
 
     public String getScore() {
-        return score.get();
+        return this.score.get();
     }
 }
