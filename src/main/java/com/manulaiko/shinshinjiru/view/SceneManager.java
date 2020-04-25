@@ -61,6 +61,16 @@ public class SceneManager {
     }
 
     /**
+     * Loads a scene in a new stage.
+     *
+     *
+     * @param fxml Scene's fxml to show in the stage.
+     */
+    public void showNew(String fxml) {
+        Platform.runLater(() -> this.doShowNew(fxml));
+    }
+
+    /**
      * Performs the scene switch in the FX thread.
      *
      * @param fxml Scene's fxml to switch the stage to.
@@ -73,6 +83,21 @@ public class SceneManager {
         var scene = this.getRootStage().getScene();
         var root = (BorderPane)scene.getRoot();
         root.setCenter(subScene.getRoot());
+    }
+
+    /**
+     * Performs the stage show in the FX thread.
+     *
+     * @param fxml Scene's fxml to show in the stage.
+     */
+    private void doShowNew(String fxml) {
+        var subScene = scenes.computeIfAbsent(fxml, this::buildScene);
+
+        log.debug("Showing scene for " + fxml + " ("+ subScene +")");
+
+        var stage = new Stage();
+        stage.setScene(subScene);
+        stage.show();
     }
 
     /**

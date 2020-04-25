@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane prefHeight="418.0" prefWidth="600.0" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manulaiko.shinshinjiru.presenter.Details">
+    <top>
+        <AnchorPane prefHeight="40.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label fx:id="title" layoutX="14.0" layoutY="6.0" text="Title">
+                    <font>
+                        <Font name="System Bold" size="22.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+    </top>
+    <left>
+        <AnchorPane prefHeight="381.0" prefWidth="170.0" BorderPane.alignment="CENTER">
+            <children>
+                <ImageView fx:id="image" fitHeight="147.0" fitWidth="100.0" layoutX="50.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                </ImageView>
+                <Separator layoutY="160.0" prefWidth="200.0" />
+                <Label layoutX="65.0" layoutY="151.0" styleClass="lightBackground" text="Synonyms">
+                    <padding>
+                        <Insets left="5.0" right="5.0" />
+                    </padding>
+                </Label>
+                <TextArea fx:id="synonyms" editable="false" layoutY="169.0" prefHeight="54.0" prefWidth="200.0" text="Entry synonyms" wrapText="true" />
+                <Separator layoutY="235.0" prefWidth="200.0" />
+                <Label layoutX="47.0" layoutY="226.0" styleClass="lightBackground" text="Genre and Tags">
+                    <padding>
+                        <Insets left="5.0" right="5.0" />
+                    </padding>
+                </Label>
+                <TextArea fx:id="tags" editable="false" layoutY="248.0" prefHeight="131.0" prefWidth="202.0" text="Entry genres and tags" wrapText="true" />
+            </children>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+            <BorderPane.margin>
+                <Insets bottom="5.0" left="5.0" right="5.0" />
+            </BorderPane.margin>
+        </AnchorPane>
+    </left>
+    <center>
+        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <tabs>
+                <Tab text="Information">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <Label layoutX="11.0" layoutY="14.0" text="Description" />
+                                <TextArea fx:id="description" editable="false" layoutX="13.0" layoutY="35.0" prefHeight="200.0" prefWidth="363.0" style="-fx-background-color: transparent;" text="Entry description" wrapText="true" />
+                                <Separator layoutX="94.0" layoutY="244.0" prefWidth="200.0" />
+                                <Label layoutX="15.0" layoutY="247.0" text="Information" />
+                                <Label layoutX="15.0" layoutY="286.0" text="Episodes" />
+                                <Label layoutX="207.0" layoutY="286.0" text="Status" />
+                                <Label layoutX="15.0" layoutY="304.0" text="Studios" />
+                                <Label layoutX="207.0" layoutY="304.0" text="Airing date" />
+                                <Label fx:id="episodes" layoutX="85.0" layoutY="286.0" />
+                                <Label fx:id="status" layoutX="292.0" layoutY="286.0" />
+                                <Label fx:id="studios" layoutX="85.0" layoutY="304.0" />
+                                <Label fx:id="date" layoutX="292.0" layoutY="304.0" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
+</BorderPane>

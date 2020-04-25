@@ -1,10 +1,15 @@
 package com.manulaiko.shinshinjiru.presenter.lists;
 
+import com.manulaiko.shinshinjiru.ShinshinjiruApplication;
 import com.manulaiko.shinshinjiru.api.model.dto.MediaListGroup;
+import com.manulaiko.shinshinjiru.view.event.ShowDetailsWindowEvent;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.function.Function;
@@ -29,6 +34,7 @@ public class TableList extends TableView<TableEntry> {
      * @return This instance
      */
     public TableList initialize(MediaListGroup entries) {
+        this.createOnClick();
         this.createColumns();
 
         super.setItems(
@@ -40,6 +46,18 @@ public class TableList extends TableView<TableEntry> {
         super.setPrefSize(960, 450);
 
         return this;
+    }
+
+    /**
+     * Creates the row click event listener.
+     */
+    private void createOnClick() {
+        super.setRowFactory(tv -> {
+            var row = new TableRow<TableEntry>();
+            row.setOnMouseClicked(this::onClick);
+
+            return row;
+        });
     }
 
     /**
@@ -72,5 +90,16 @@ public class TableList extends TableView<TableEntry> {
         col.setCellValueFactory(c -> property.apply(c.getValue()));
 
         return col;
+    }
+
+    /**
+     * Handles row onClick events.
+     *
+     * @param event Fired event.
+     */
+    private void onClick(MouseEvent event) {
+        if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() != 2) {
+            ShinshinjiruApplication.publish(new ShowDetailsWindowEvent(this, super.getSelectionModel().getSelectedItem()));
+        }
     }
 }

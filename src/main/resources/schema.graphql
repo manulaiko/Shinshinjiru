@@ -1214,10 +1214,7 @@ type Media {
   status: MediaStatus
 
   """Short description of the media's story and characters"""
-  description(
-    """Return the string in pre-parsed html instead of markdown"""
-    asHtml: Boolean
-  ): String
+  description: String
 
   """The first official release date of the media"""
   startDate: FuzzyDate
@@ -1253,10 +1250,7 @@ type Media {
   isLicensed: Boolean
 
   """Source type the media was adapted from."""
-  source(
-    """Provide 2 to use new version 2 of sources enum"""
-    version: Int
-  ): MediaSource
+  source: MediaSource
 
   """Official Twitter hashtags for the media"""
   hashtag: String
@@ -1317,7 +1311,7 @@ type Media {
   ): StaffConnection
 
   """The companies who produced the media"""
-  studios(sort: [StudioSort], isMain: Boolean): StudioConnection
+  studios: StudioConnection
 
   """If the media is marked as favourite by the current authenticated user"""
   isFavourite: Boolean!

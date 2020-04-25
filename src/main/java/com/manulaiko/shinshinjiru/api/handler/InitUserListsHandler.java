@@ -71,6 +71,7 @@ public class InitUserListsHandler implements ApplicationListener<InitUserListsEv
                                                                                                         .node(
                                                                                                                 new StudioResponseProjection()
                                                                                                                         .name()
+                                                                                                                        .isAnimationStudio()
                                                                                                         )
                                                                                         )
                                                                         )
@@ -124,6 +125,9 @@ public class InitUserListsHandler implements ApplicationListener<InitUserListsEv
                 UserLists.class
         );
 
-        ShinshinjiruApplication.publish(new UserListsInitializedEvent(this, result.getData().get("MediaListCollection")));
+        ShinshinjiruApplication.publish(new UserListsInitializedEvent(
+                this,
+                result.getData().get("MediaListCollection")
+        ));
     }
 }

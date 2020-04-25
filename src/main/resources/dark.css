@@ -30,10 +30,10 @@ BorderPane, .tab, .control-buttons-tab, .tab-header {
     -fx-font-size: 32;
 }
 
-.table-row-cell :even {
+.darkBackground, .table-row-cell :even {
     -fx-background-color: darkColor;
 }
 
-.menu-item {
+.menu-item, .lightBackground {
     -fx-background-color: lightColor;
 }
