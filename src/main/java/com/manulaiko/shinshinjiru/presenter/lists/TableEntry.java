@@ -14,9 +14,10 @@ import lombok.Data;
  */
 @Data
 public class TableEntry {
-    private final SimpleStringProperty nameProperty;
-    private final SimpleStringProperty progressProperty;
-    private final SimpleStringProperty scoreProperty;
+    private final SimpleStringProperty name;
+    private final SimpleStringProperty progress;
+    private final SimpleStringProperty score;
+    private final SimpleStringProperty notes;
     private final MediaList entry;
 
     /**
@@ -25,11 +26,12 @@ public class TableEntry {
      * @param entry Media entry.
      */
     public TableEntry(MediaList entry) {
-        this.nameProperty = new SimpleStringProperty(entry.getMedia().getTitle().getUserPreferred());
-        this.progressProperty = new SimpleStringProperty(
+        this.name = new SimpleStringProperty(entry.getMedia().getTitle().getUserPreferred());
+        this.progress = new SimpleStringProperty(
                 entry.getProgress() + "/" + entry.getMedia().getEpisodes()
         );
-        this.scoreProperty = new SimpleStringProperty(entry.getScore() +" (avg: "+ entry.getMedia().getAverageScore() +")");
+        this.score = new SimpleStringProperty(entry.getScore() +" (avg: "+ entry.getMedia().getAverageScore() +")");
+        this.notes = new SimpleStringProperty(entry.getNotes());
 
         this.entry = entry;
     }

@@ -60,6 +60,7 @@ public class InitUserListsHandler implements ApplicationListener<InitUserListsEv
                                                         .notes()
                                                         .hiddenFromStatusLists()
                                                         .customLists()
+                                                        .notes()
                                                         .media(
                                                                 new MediaResponseProjection()
                                                                         .studios(

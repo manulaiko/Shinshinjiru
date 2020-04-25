@@ -39,13 +39,6 @@ public class TableList extends TableView<TableEntry> {
         );
         super.setPrefSize(960, 450);
 
-        super.setOnKeyPressed(event -> {
-            var pos = super.getFocusModel().getFocusedCell();
-            if (pos != null && event.getCode().isLetterKey()) {
-                super.edit(pos.getRow(), pos.getTableColumn());
-            }
-        });
-
         return this;
     }
 
@@ -54,9 +47,10 @@ public class TableList extends TableView<TableEntry> {
      */
     private void createColumns() {
         super.getColumns().addAll(
-                createColumn("Name", .75, TableEntry::getNameProperty),
-                createColumn("Progress", .124, TableEntry::getProgressProperty),
-                createColumn("Score", .124, TableEntry::getScoreProperty)
+                createColumn("Name", .5, TableEntry::getName),
+                createColumn("Progress", .125, TableEntry::getProgress),
+                createColumn("Score", .125, TableEntry::getScore),
+                createColumn("Notes", .25, TableEntry::getNotes)
         );
     }
 
@@ -74,7 +68,7 @@ public class TableList extends TableView<TableEntry> {
     ) {
         var col = new TableColumn<TableEntry, String>(title);
 
-        col.prefWidthProperty().bind(super.widthProperty().multiply(size));
+        col.prefWidthProperty().bind(super.widthProperty().multiply(size).subtract(5));
         col.setCellValueFactory(c -> property.apply(c.getValue()));
 
         return col;
