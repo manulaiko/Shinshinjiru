@@ -28,7 +28,7 @@ public class TableEntry {
     public TableEntry(MediaList entry) {
         this.name = new SimpleStringProperty(entry.getMedia().getTitle().getUserPreferred());
         this.progress = new SimpleStringProperty(
-                entry.getProgress() + "/" + entry.getMedia().getEpisodes()
+                entry.getProgress() + "/" + (entry.getMedia().getEpisodes() == null ? "?" : entry.getMedia().getEpisodes())
         );
         this.score = new SimpleStringProperty(entry.getScore() +" (avg: "+ entry.getMedia().getAverageScore() +")");
         this.notes = new SimpleStringProperty(entry.getNotes());

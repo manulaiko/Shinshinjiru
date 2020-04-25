@@ -12,9 +12,11 @@ import javafx.scene.image.ImageView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.stream.Collector;
+import java.time.Month;
+import java.time.format.TextStyle;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Details presenter.
@@ -70,7 +72,7 @@ public class Details {
                 String.join(System.lineSeparator(), entry.getSynonyms())
         );
 
-        var tags = entry.getTags().stream().map(MediaTag::getName).collect(Collectors.joining(", "));
+        var tags   = entry.getTags().stream().map(MediaTag::getName).collect(Collectors.joining(", "));
         var genres = String.join(", ", entry.getGenres());
 
         this.tags.setText(
@@ -79,15 +81,26 @@ public class Details {
 
         description.setText(entry.getDescription().replaceAll("<br\\s*/?>", System.lineSeparator()));
 
-        episodes.setText(entry.getEpisodes().toString());
+        if (entry.getEpisodes() != null) {
+            episodes.setText(entry.getEpisodes().toString());
+        } else {
+            episodes.setText("?");
+        }
 
-        switch(entry.getStatus()) {
+        switch (entry.getStatus()) {
             case FINISHED:
                 status.setText("Finished");
                 break;
 
             case RELEASING:
                 status.setText("On going");
+
+                if (entry.getNextAiringEpisode() != null) {
+                    var episode = entry.getNextAiringEpisode().getEpisode();
+                    var time    = entry.getNextAiringEpisode().getTimeUntilAiring();
+
+                    status.setText("On going, episode " + episode + " airing in " + convertSeconds(time));
+                }
                 break;
 
             case NOT_YET_RELEASED:
@@ -109,6 +122,25 @@ public class Details {
                      .collect(Collectors.joining(", "))
         );
 
-        date.setText(entry.getStartDate().getMonth() + "/" + entry.getStartDate().getYear());
+        date.setText(
+                Month.of(entry.getStartDate().getMonth()).getDisplayName(TextStyle.FULL, Locale.getDefault()) +
+                ", " +
+                entry.getStartDate().getYear()
+        );
+    }
+
+    /**
+     * Converts seconds to display text.
+     *
+     * @param seconds Seconds to convert.
+     *
+     * @return Text to display.
+     */
+    private String convertSeconds(int seconds) {
+        int  day    = (int) TimeUnit.SECONDS.toDays(seconds);
+        long hours  = TimeUnit.SECONDS.toHours(seconds) - (day * 24);
+        long minute = TimeUnit.SECONDS.toMinutes(seconds) - (TimeUnit.SECONDS.toHours(seconds) * 60);
+
+        return day + "d " + hours + "h " + minute + "m";
     }
 }
