@@ -91,7 +91,7 @@ public class SceneManager {
      * @param fxml Scene's fxml to show in the stage.
      */
     private void doShowNew(String fxml) {
-        var subScene = scenes.computeIfAbsent(fxml, this::buildScene);
+        var subScene = this.buildScene(fxml);
 
         log.debug("Showing scene for " + fxml + " ("+ subScene +")");
 
