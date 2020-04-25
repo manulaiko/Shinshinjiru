@@ -5,7 +5,6 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.function.Function;
@@ -19,6 +18,7 @@ import java.util.stream.Collectors;
  *
  * @author Manulaiko <manulaiko@gmail.com>
  */
+@SuppressWarnings("unchecked")
 @Slf4j
 public class TableList extends TableView<TableEntry> {
     /**
@@ -38,8 +38,6 @@ public class TableList extends TableView<TableEntry> {
                        .collect(Collectors.toCollection(FXCollections::observableArrayList))
         );
         super.setPrefSize(960, 450);
-        super.setEditable(true);
-        super.getSelectionModel().setCellSelectionEnabled(true);
 
         super.setOnKeyPressed(event -> {
             var pos = super.getFocusModel().getFocusedCell();
@@ -55,13 +53,11 @@ public class TableList extends TableView<TableEntry> {
      * Creates the columns.
      */
     private void createColumns() {
-        //noinspection unchecked
         super.getColumns().addAll(
-                createColumn("Name", .75, false, TableEntry::getNameProperty),
-                createColumn("Progress", .124, true, TableEntry::getProgressProperty),
-                createColumn("Score", .124, true, TableEntry::getScoreProperty)
+                createColumn("Name", .75, TableEntry::getNameProperty),
+                createColumn("Progress", .124, TableEntry::getProgressProperty),
+                createColumn("Score", .124, TableEntry::getScoreProperty)
         );
-        super.getColumns().forEach(c -> c.setEditable(true));
     }
 
     /**
@@ -74,15 +70,12 @@ public class TableList extends TableView<TableEntry> {
      * @return Created cell;
      */
     private TableColumn<TableEntry, String> createColumn(
-            String title, double size, boolean editable, Function<TableEntry, StringProperty> property
+            String title, double size, Function<TableEntry, StringProperty> property
     ) {
         var col = new TableColumn<TableEntry, String>(title);
 
         col.prefWidthProperty().bind(super.widthProperty().multiply(size));
         col.setCellValueFactory(c -> property.apply(c.getValue()));
-        if (editable) {
-            col.setCellFactory(c -> EditCell.createStringEditCell());
-        }
 
         return col;
     }
