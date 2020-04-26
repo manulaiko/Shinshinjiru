@@ -1,29 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.Spinner?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="400.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manulaiko.shinshinjiru.presenter.Details">
+<BorderPane prefHeight="400.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manulaiko.shinshinjiru.presenter.Details">
     <top>
-        <AnchorPane prefHeight="40.0" prefWidth="764.0" BorderPane.alignment="CENTER">
+        <AnchorPane maxHeight="28.0" minHeight="28.0" prefHeight="28.0" prefWidth="764.0" BorderPane.alignment="CENTER">
             <children>
-                <Label fx:id="title" layoutX="14.0" layoutY="6.0" text="Title">
+                <Label fx:id="title" layoutX="14.0" layoutY="6.0" maxHeight="28.0" minHeight="28.0" prefHeight="28.0" text="Title">
                     <font>
-                        <Font name="System Bold" size="22.0" />
+                        <Font name="System Bold" size="20.0" />
                     </font>
                 </Label>
             </children>
@@ -49,81 +38,136 @@
         <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
             <tabs>
                 <Tab text="Information">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                        <Separator layoutX="125.0" layoutY="21.0" prefWidth="200.0" />
-                                <TextArea fx:id="description" editable="false" layoutX="13.0" layoutY="35.0" prefHeight="196.0" prefWidth="423.0" style="-fx-background-color: transparent;" text="Entry description" wrapText="true" />
-                                <Separator layoutX="125.0" layoutY="246.0" prefWidth="200.0" />
-                                <Label layoutX="190.0" layoutY="12.0" styleClass="lightBackground" text="Description">
+                  <GridPane hgap="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="200.0" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="55.0" minWidth="10.0" prefWidth="55.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="74.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="70.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="0.0" prefWidth="151.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="314.0" minWidth="10.0" prefWidth="310.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="16.0" minHeight="16.0" prefHeight="16.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="16.0" minHeight="16.0" prefHeight="16.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="16.0" minHeight="16.0" prefHeight="16.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="16.0" minHeight="16.0" prefHeight="16.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="16.0" minHeight="16.0" prefHeight="16.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Separator prefWidth="200.0" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <Label styleClass="lightBackground" text="Description" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <padding>
                               <Insets left="5.0" right="5.0" />
-                           </padding></Label>
-                                <Label layoutX="188.0" layoutY="239.0" styleClass="lightBackground" text="Information">
+                           </padding>
+                        </Label>
+                        <TextArea fx:id="description" editable="false" prefHeight="196.0" prefWidth="423.0" style="-fx-background-color: transparent;" text="Entry description" wrapText="true" GridPane.columnSpan="4" GridPane.rowIndex="1" GridPane.rowSpan="3" />
+                        <Separator prefWidth="200.0" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                        <Label styleClass="lightBackground" text="Information" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                            <padding>
                               <Insets left="5.0" right="5.0" />
-                           </padding></Label>
-                                <Label layoutX="15.0" layoutY="268.0" text="Episodes" />
-                                <Label layoutX="238.0" layoutY="295.0" text="Status" />
-                                <Label layoutX="13.0" layoutY="295.0" text="Studios" />
-                                <Label layoutX="238.0" layoutY="268.0" text="Airing date" />
-                                <Label fx:id="episodes" layoutX="85.0" layoutY="268.0" text="000" />
-                                <Label fx:id="status" layoutX="325.0" layoutY="295.0" text="000" />
-                                <Label fx:id="studios" layoutX="85.0" layoutY="295.0" text="000" />
-                                <Label fx:id="date" layoutX="325.0" layoutY="268.0" text="000" />
-                            <Separator layoutX="481.0" layoutY="21.0" prefWidth="200.0" />
-                            <Label layoutX="528.0" layoutY="12.0" styleClass="lightBackground" text="Genre and Tags">
-                                <padding>
-                                    <Insets left="5.0" right="5.0" />
-                                </padding>
-                            </Label>
-                            <TextArea fx:id="tags" editable="false" layoutX="480.0" layoutY="35.0" prefHeight="120.0" prefWidth="200.0" text="Entry genres and tags" wrapText="true" />
-                            <Separator layoutX="480.0" layoutY="179.0" prefWidth="200.0" />
-                            <Label layoutX="545.0" layoutY="170.0" styleClass="lightBackground" text="Synonyms">
-                                <padding>
-                                    <Insets left="5.0" right="5.0" />
-                                </padding>
-                            </Label>
-                            <TextArea fx:id="synonyms" editable="false" layoutX="482.0" layoutY="192.0" prefHeight="97.0" prefWidth="200.0" text="Entry synonyms" wrapText="true" />
-                            </children>
-                        </AnchorPane>
-                    </content>
+                           </padding>
+                        </Label>
+                        <Label text="Episodes" GridPane.rowIndex="5" />
+                        <Label fx:id="episodes" text="000" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label text="Studios" GridPane.rowIndex="6" />
+                        <Label fx:id="studios" text="000" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label text="Airing date" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                        <Label fx:id="date" text="000" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                        <Label text="Status" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                        <Label fx:id="status" text="000" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                        <Separator prefWidth="200.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                        <Label styleClass="lightBackground" text="Genre and Tags" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                           <padding>
+                              <Insets left="5.0" right="5.0" />
+                           </padding>
+                        </Label>
+                        <TextArea fx:id="tags" editable="false" prefHeight="120.0" prefWidth="200.0" text="Entry genres and tags" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="3" GridPane.rowSpan="4" />
+                        <Separator prefWidth="200.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <Label styleClass="lightBackground" text="Synonyms" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                           <padding>
+                              <Insets left="5.0" right="5.0" />
+                           </padding>
+                        </Label>
+                        <TextArea fx:id="synonyms" editable="false" prefHeight="97.0" prefWidth="200.0" text="Entry synonyms" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </GridPane>
                 </Tab>
             <Tab text="List Entry">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Label layoutX="14.0" layoutY="87.0" text="Progress" />
-                        <Spinner editable="true" layoutX="76.0" layoutY="82.0" prefHeight="28.0" prefWidth="56.0" />
-                        <Label layoutX="14.0" layoutY="46.0" text="Status" />
-                        <ChoiceBox layoutX="76.0" layoutY="41.0" prefWidth="150.0" />
-                        <Label layoutX="174.0" layoutY="87.0" text="Score" />
-                        <Spinner editable="true" layoutX="226.0" layoutY="82.0" prefHeight="28.0" prefWidth="56.0" />
-                        <Label layoutX="143.0" layoutY="87.0" text="/ 0" />
-                        <Label layoutX="296.0" layoutY="87.0" text="avg 0" />
-                        <Label layoutX="14.0" layoutY="126.0" text="Priority" />
-                        <Spinner editable="true" layoutX="76.0" layoutY="121.0" prefHeight="28.0" prefWidth="56.0" />
-                        <Separator layoutX="126.0" layoutY="21.0" prefWidth="200.0" />
-                        <Label layoutX="208.0" layoutY="12.0" styleClass="lightBackground" text="Details" />
-                        <Label layoutX="174.0" layoutY="126.0" text="Repeat" />
-                        <Spinner editable="true" layoutX="226.0" layoutY="121.0" prefHeight="28.0" prefWidth="56.0" />
-                        <Separator layoutX="126.0" layoutY="173.0" prefWidth="200.0" />
-                        <Label layoutX="208.0" layoutY="164.0" styleClass="lightBackground" text="Notes" />
-                        <TextArea layoutX="14.0" layoutY="194.0" prefHeight="114.0" prefWidth="397.0" />
-                        <Separator layoutX="477.0" layoutY="21.0" prefWidth="200.0" />
-                        <Label layoutX="538.0" layoutY="12.0" styleClass="lightBackground" text="Activity reply" />
-                        <TextArea layoutX="432.0" layoutY="35.0" prefHeight="122.0" prefWidth="270.0" />
-                        <Button layoutX="432.0" layoutY="280.0" mnemonicParsing="false" text="Update Entry" />
-                        <Button layoutX="613.0" layoutY="280.0" mnemonicParsing="false" text="Delete Entry" />
-                        <CheckBox layoutX="296.0" layoutY="126.0" mnemonicParsing="false" text="Private" />
-                        <CheckBox layoutX="244.0" layoutY="46.0" mnemonicParsing="false" text="Hide from status list" />
-                        <DatePicker layoutX="511.0" layoutY="180.0" />
-                        <Label layoutX="432.0" layoutY="185.0" text="Start date" />
-                        <Label layoutX="432.0" layoutY="225.0" text="End date" />
-                        <DatePicker layoutX="511.0" layoutY="220.0" />
-                     </children>
-                  </AnchorPane>
-              </content>
+              <GridPane hgap="5.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="200.0" vgap="5.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+                <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="68.0" minWidth="48.0" prefWidth="68.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="85.0" minWidth="10.0" prefWidth="60.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="27.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="86.0" minWidth="10.0" prefWidth="48.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="92.0" minWidth="10.0" prefWidth="57.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="101.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="112.0" minWidth="10.0" prefWidth="83.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="127.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="74.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="33.0" minWidth="10.0" prefWidth="33.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints maxHeight="8.0" minHeight="8.0" prefHeight="8.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="36.0" minHeight="36.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="36.0" minHeight="36.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="36.0" minHeight="36.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="8.0" minHeight="8.0" prefHeight="8.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="36.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="36.0" minHeight="36.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="36.0" minHeight="36.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
+                </rowConstraints>
+                 <children>
+                    <Label text="Status" GridPane.rowIndex="1" />
+                    <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+                    <Label text="Progress" GridPane.rowIndex="2" />
+                    <Spinner editable="true" prefHeight="28.0" prefWidth="72.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <Label text="Priority" GridPane.rowIndex="3" />
+                    <Spinner editable="true" prefHeight="28.0" prefWidth="72.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <Separator prefWidth="200.0" GridPane.columnSpan="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                    <Label styleClass="lightBackground" text="Details" GridPane.columnSpan="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <GridPane.margin>
+                           <Insets />
+                        </GridPane.margin>
+                        <padding>
+                           <Insets left="5.0" right="5.0" />
+                        </padding></Label>
+                    <CheckBox mnemonicParsing="false" text="Hide from status list" GridPane.columnIndex="4" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+                    <Label text="/ 0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                    <Separator prefWidth="200.0" GridPane.columnSpan="6" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                    <Label styleClass="lightBackground" text="Notes" GridPane.columnSpan="6" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                        <padding>
+                           <Insets left="5.0" right="5.0" />
+                        </padding></Label>
+                    <TextArea prefHeight="114.0" prefWidth="397.0" GridPane.columnSpan="6" GridPane.rowIndex="5" GridPane.rowSpan="4" />
+                    <Label text="Score" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                    <Spinner editable="true" prefHeight="28.0" prefWidth="56.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                    <Label text="Repeat" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                    <Spinner editable="true" prefHeight="28.0" prefWidth="56.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                    <Label text="avg 0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                    <CheckBox mnemonicParsing="false" text="Private" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                    <Separator prefWidth="200.0" GridPane.columnIndex="6" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                    <Label styleClass="lightBackground" text="Activity reply" GridPane.columnIndex="6" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <padding>
+                           <Insets left="5.0" right="5.0" />
+                        </padding></Label>
+                    <TextArea prefHeight="114.0" prefWidth="397.0" GridPane.columnIndex="6" GridPane.columnSpan="4" GridPane.rowIndex="1" GridPane.rowSpan="5" />
+                    <Label text="Start date" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+                    <DatePicker GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="6" />
+                    <Label text="End date" GridPane.columnIndex="6" GridPane.rowIndex="7" />
+                    <DatePicker GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="7" />
+                    <Button mnemonicParsing="false" text="Update Entry" GridPane.columnIndex="6" GridPane.columnSpan="2" GridPane.rowIndex="8" />
+                    <Button mnemonicParsing="false" text="Delete Entry" GridPane.columnIndex="8" GridPane.columnSpan="2" GridPane.rowIndex="8" />
+                 </children>
+                 <padding>
+                    <Insets left="10.0" right="10.0" top="10.0" />
+                 </padding>
+              </GridPane>
             </Tab>
             </tabs>
         </TabPane>
