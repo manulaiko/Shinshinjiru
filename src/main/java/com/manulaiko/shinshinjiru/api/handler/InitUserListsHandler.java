@@ -42,6 +42,11 @@ public class InitUserListsHandler implements ApplicationListener<InitUserListsEv
         request.setUserId(anilist.getUser().getId());
         request.setType(MediaType.ANIME);
 
+        var date = new FuzzyDateResponseProjection()
+                .month()
+                .year()
+                .day();
+
         var result = api.query(
                 new GraphQLRequest(
                         request,
@@ -61,6 +66,8 @@ public class InitUserListsHandler implements ApplicationListener<InitUserListsEv
                                                         .hiddenFromStatusLists()
                                                         .customLists()
                                                         .notes()
+                                                        .startedAt(date)
+                                                        .completedAt(date)
                                                         .media(
                                                                 new MediaResponseProjection()
                                                                         .studios(
@@ -90,16 +97,14 @@ public class InitUserListsHandler implements ApplicationListener<InitUserListsEv
                                                                                             .large()
                                                                         )
                                                                         .season()
-                                                                        .startDate(
-                                                                                new FuzzyDateResponseProjection().year()
-                                                                                                                 .month()
-                                                                        )
+                                                                        .startDate(date)
                                                                         .synonyms()
                                                                         .genres()
                                                                         .tags(
-                                                                                new MediaTagResponseProjection().name()
-                                                                                                                .rank()
-                                                                                                                .category()
+                                                                                new MediaTagResponseProjection()
+                                                                                        .name()
+                                                                                        .rank()
+                                                                                        .category()
                                                                         )
                                                                         .nextAiringEpisode(
                                                                                 new AiringScheduleResponseProjection()
