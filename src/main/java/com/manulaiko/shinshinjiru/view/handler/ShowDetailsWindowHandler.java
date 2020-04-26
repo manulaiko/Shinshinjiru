@@ -1,10 +1,11 @@
 package com.manulaiko.shinshinjiru.view.handler;
 
-import com.manulaiko.shinshinjiru.ShinshinjiruApplication;
-import com.manulaiko.shinshinjiru.api.AniList;
-import com.manulaiko.shinshinjiru.presenter.lists.DetailEntry;
+import com.manulaiko.shinshinjiru.presenter.Details;
+import com.manulaiko.shinshinjiru.presenter.lists.TableEntry;
 import com.manulaiko.shinshinjiru.view.SceneManager;
 import com.manulaiko.shinshinjiru.view.event.ShowDetailsWindowEvent;
+import javafx.application.Platform;
+import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -24,18 +25,32 @@ public class ShowDetailsWindowHandler implements ApplicationListener<ShowDetails
     @Autowired
     private SceneManager sceneManager;
 
-    @Autowired
-    private DetailEntry detailEntry;
+    private TableEntry entry;
 
     /**
      * @inheritDoc
      */
     @Override
     public void onApplicationEvent(ShowDetailsWindowEvent event) {
-        var entry = event.getEntry();
+        entry = event.getEntry();
+        log.debug("Showing details window for " + entry.getEntry().getMedia().getTitle().getUserPreferred());
 
-        log.debug("Showing details window for "+ entry.getEntry().getMedia().getTitle().getUserPreferred());
-        detailEntry.setEntry(entry);
-        sceneManager.showNew("Details.fxml");
+        Platform.runLater(this::show);
+    }
+
+    /**
+     * Builds and shows the Details window.
+     */
+    private void show() {
+        var stage      = new Stage();
+        var scene      = sceneManager.buildScene("Details.fxml");
+        var controller = (Details) scene.getUserData();
+
+        scene.getStylesheets().add("dark.css");
+        controller.setEntry(entry);
+        controller.init();
+
+        stage.setScene(scene);
+        stage.show();
     }
 }

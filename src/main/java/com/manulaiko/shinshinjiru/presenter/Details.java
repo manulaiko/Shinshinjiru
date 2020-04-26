@@ -3,14 +3,14 @@ package com.manulaiko.shinshinjiru.presenter;
 import com.manulaiko.shinshinjiru.api.model.dto.MediaTag;
 import com.manulaiko.shinshinjiru.api.model.dto.Studio;
 import com.manulaiko.shinshinjiru.api.model.dto.StudioEdge;
-import com.manulaiko.shinshinjiru.presenter.lists.DetailEntry;
+import com.manulaiko.shinshinjiru.presenter.lists.TableEntry;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import lombok.Setter;
+import org.springframework.stereotype.Controller;
 
 import java.time.Month;
 import java.time.format.TextStyle;
@@ -26,10 +26,10 @@ import java.util.stream.Collectors;
  *
  * @author Manulaiko <manulaiko@gmail.com>
  */
-@Component
+@Controller
 public class Details {
-    @Autowired
-    private DetailEntry entry;
+    @Setter
+    private TableEntry entry;
 
     @FXML
     private Label title;
@@ -58,9 +58,8 @@ public class Details {
     @FXML
     private Label date;
 
-    @FXML
-    public void initialize() {
-        var entry = this.entry.getEntry().getEntry().getMedia();
+    public void init() {
+        var entry = this.entry.getEntry().getMedia();
 
         title.setText(
                 entry.getTitle().getUserPreferred()
@@ -87,30 +86,22 @@ public class Details {
             episodes.setText("?");
         }
 
-        switch (entry.getStatus()) {
-            case FINISHED:
-                status.setText("Finished");
-                break;
-
-            case RELEASING:
-                status.setText("On going");
-
+        var text = switch (entry.getStatus()) {
+            case FINISHED -> "Finished";
+            case RELEASING -> {
                 if (entry.getNextAiringEpisode() != null) {
                     var episode = entry.getNextAiringEpisode().getEpisode();
                     var time    = entry.getNextAiringEpisode().getTimeUntilAiring();
 
-                    status.setText("On going, episode " + episode + " airing in " + convertSeconds(time));
+                    yield "On going, episode " + episode + " airing in " + convertSeconds(time);
                 }
-                break;
 
-            case NOT_YET_RELEASED:
-                status.setText("Not released yet");
-                break;
-
-            case CANCELLED:
-                status.setText("Cancelled :(");
-                break;
-        }
+                yield "On going";
+            }
+            case NOT_YET_RELEASED -> "Not released yet";
+            case CANCELLED -> "Cancelled :(";
+        };
+        status.setText(text);
 
         studios.setText(
                 entry.getStudios()

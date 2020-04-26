@@ -61,16 +61,6 @@ public class SceneManager {
     }
 
     /**
-     * Loads a scene in a new stage.
-     *
-     *
-     * @param fxml Scene's fxml to show in the stage.
-     */
-    public void showNew(String fxml) {
-        Platform.runLater(() -> this.doShowNew(fxml));
-    }
-
-    /**
      * Performs the scene switch in the FX thread.
      *
      * @param fxml Scene's fxml to switch the stage to.
@@ -86,28 +76,13 @@ public class SceneManager {
     }
 
     /**
-     * Performs the stage show in the FX thread.
-     *
-     * @param fxml Scene's fxml to show in the stage.
-     */
-    private void doShowNew(String fxml) {
-        var subScene = this.buildScene(fxml);
-
-        log.debug("Showing scene for " + fxml + " ("+ subScene +")");
-
-        var stage = new Stage();
-        stage.setScene(subScene);
-        stage.show();
-    }
-
-    /**
      * Builds and returns a new scene.
      *
      * @param fxml Scene's fxml.
      *
      * @return New scene.
      */
-    private Scene buildScene(String fxml) {
+    public Scene buildScene(String fxml) {
         log.debug("Building scene for " + fxml);
         try {
             var loader = new ContextAwareFXMLLoader(fxml);
