@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="400.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manulaiko.shinshinjiru.presenter.Details">
+<BorderPane prefHeight="400.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manulaiko.shinshinjiru.presenter.Details">
     <top>
         <AnchorPane prefHeight="40.0" prefWidth="764.0" BorderPane.alignment="CENTER">
             <children>
@@ -78,6 +89,42 @@
                         </AnchorPane>
                     </content>
                 </Tab>
+            <Tab text="List Entry">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="87.0" text="Progress" />
+                        <Spinner editable="true" layoutX="76.0" layoutY="82.0" prefHeight="28.0" prefWidth="56.0" />
+                        <Label layoutX="14.0" layoutY="46.0" text="Status" />
+                        <ChoiceBox layoutX="76.0" layoutY="41.0" prefWidth="150.0" />
+                        <Label layoutX="174.0" layoutY="87.0" text="Score" />
+                        <Spinner editable="true" layoutX="226.0" layoutY="82.0" prefHeight="28.0" prefWidth="56.0" />
+                        <Label layoutX="143.0" layoutY="87.0" text="/ 0" />
+                        <Label layoutX="296.0" layoutY="87.0" text="avg 0" />
+                        <Label layoutX="14.0" layoutY="126.0" text="Priority" />
+                        <Spinner editable="true" layoutX="76.0" layoutY="121.0" prefHeight="28.0" prefWidth="56.0" />
+                        <Separator layoutX="126.0" layoutY="21.0" prefWidth="200.0" />
+                        <Label layoutX="208.0" layoutY="12.0" styleClass="lightBackground" text="Details" />
+                        <Label layoutX="174.0" layoutY="126.0" text="Repeat" />
+                        <Spinner editable="true" layoutX="226.0" layoutY="121.0" prefHeight="28.0" prefWidth="56.0" />
+                        <Separator layoutX="126.0" layoutY="173.0" prefWidth="200.0" />
+                        <Label layoutX="208.0" layoutY="164.0" styleClass="lightBackground" text="Notes" />
+                        <TextArea layoutX="14.0" layoutY="194.0" prefHeight="114.0" prefWidth="397.0" />
+                        <Separator layoutX="477.0" layoutY="21.0" prefWidth="200.0" />
+                        <Label layoutX="538.0" layoutY="12.0" styleClass="lightBackground" text="Activity reply" />
+                        <TextArea layoutX="432.0" layoutY="35.0" prefHeight="122.0" prefWidth="270.0" />
+                        <Button layoutX="432.0" layoutY="280.0" mnemonicParsing="false" text="Update Entry" />
+                        <Button layoutX="613.0" layoutY="280.0" mnemonicParsing="false" text="Delete Entry" />
+                        <CheckBox layoutX="296.0" layoutY="126.0" mnemonicParsing="false" text="Private" />
+                        <CheckBox layoutX="244.0" layoutY="46.0" mnemonicParsing="false" text="Hide from status list" />
+                        <DatePicker layoutX="511.0" layoutY="180.0" />
+                        <Label layoutX="432.0" layoutY="185.0" text="Start date" />
+                        <Label layoutX="432.0" layoutY="225.0" text="End date" />
+                        <DatePicker layoutX="511.0" layoutY="220.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
             </tabs>
         </TabPane>
     </center>
