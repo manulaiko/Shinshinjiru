@@ -1,73 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.Spinner?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-
-<GridPane hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="720.0" vgap="5.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="68.0" minWidth="48.0" prefWidth="68.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="85.0" minWidth="10.0" prefWidth="60.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="27.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="86.0" minWidth="10.0" prefWidth="48.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="92.0" minWidth="10.0" prefWidth="57.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="101.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="112.0" minWidth="10.0" prefWidth="83.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="127.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="74.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="33.0" minWidth="10.0" prefWidth="33.0" />
-  </columnConstraints>
-  <rowConstraints>
-      <RowConstraints maxHeight="16.0" minHeight="16.0" prefHeight="16.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="36.0" minHeight="36.0" prefHeight="36.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="36.0" minHeight="36.0" prefHeight="36.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="36.0" minHeight="36.0" prefHeight="36.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="16.0" minHeight="16.0" prefHeight="16.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="36.0" prefHeight="36.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="36.0" minHeight="36.0" prefHeight="36.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="36.0" minHeight="36.0" prefHeight="36.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="36.0" minHeight="36.0" prefHeight="36.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-   <children>
-      <Label text="Status" GridPane.rowIndex="1" />
-      <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" />
-      <Label text="Progress" GridPane.rowIndex="2" />
-      <Spinner editable="true" prefHeight="28.0" prefWidth="72.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <Label text="Priority" GridPane.rowIndex="3" />
-      <Spinner editable="true" prefHeight="28.0" prefWidth="72.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <Separator prefWidth="200.0" GridPane.columnSpan="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-      <Label styleClass="lightBackground" text="Details" GridPane.columnSpan="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-      <CheckBox mnemonicParsing="false" text="Hide from status list" GridPane.columnIndex="4" GridPane.columnSpan="3" GridPane.rowIndex="1" />
-      <Label text="/ 0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-      <Separator prefWidth="200.0" GridPane.columnSpan="6" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-      <Label styleClass="lightBackground" text="Notes" GridPane.columnSpan="6" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-      <TextArea prefHeight="114.0" prefWidth="397.0" GridPane.columnSpan="6" GridPane.rowIndex="5" GridPane.rowSpan="4" />
-      <Label text="Score" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-      <Spinner editable="true" prefHeight="28.0" prefWidth="56.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-      <Label text="Repeat" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-      <Spinner editable="true" prefHeight="28.0" prefWidth="56.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-      <Label text="avg 0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-      <CheckBox mnemonicParsing="false" text="Private" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-      <Separator prefWidth="200.0" GridPane.columnIndex="6" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-      <Label styleClass="lightBackground" text="Activity reply" GridPane.columnIndex="6" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-      <TextArea prefHeight="114.0" prefWidth="397.0" GridPane.columnIndex="6" GridPane.columnSpan="4" GridPane.rowIndex="1" GridPane.rowSpan="5" />
-      <Label text="Start date" GridPane.columnIndex="6" GridPane.rowIndex="6" />
-      <DatePicker GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="6" />
-      <Label text="End date" GridPane.columnIndex="6" GridPane.rowIndex="7" />
-      <DatePicker GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="7" />
-      <Button mnemonicParsing="false" text="Update Entry" GridPane.columnIndex="6" GridPane.columnSpan="2" GridPane.rowIndex="8" />
-      <Button mnemonicParsing="false" text="Delete Entry" GridPane.columnIndex="8" GridPane.columnSpan="2" GridPane.rowIndex="8" />
-   </children>
-   <padding>
-      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-   </padding>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<GridPane fx:controller="com.manulaiko.shinshinjiru.presenter.details.ListEntry" hgap="5.0" minHeight="-Infinity"
+          minWidth="-Infinity" prefHeight="320.0" prefWidth="720.0" vgap="5.0"
+          xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="68.0" minWidth="48.0" prefWidth="58.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="85.0" minWidth="10.0" prefWidth="68.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="31.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="86.0" minWidth="10.0" prefWidth="43.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="92.0" minWidth="10.0" prefWidth="73.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="94.0" minWidth="10.0" prefWidth="67.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="112.0" minWidth="10.0" prefWidth="83.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="127.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="74.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="33.0" minWidth="10.0" prefWidth="33.0"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="8.0" minHeight="8.0" prefHeight="8.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="36.0" minHeight="36.0" prefHeight="36.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="36.0" minHeight="36.0" prefHeight="36.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="36.0" minHeight="36.0" prefHeight="36.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="8.0" minHeight="8.0" prefHeight="8.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="36.0" prefHeight="36.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="36.0" minHeight="36.0" prefHeight="36.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="36.0" minHeight="36.0" prefHeight="36.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <children>
+        <Label text="Status" GridPane.rowIndex="1"/>
+        <ChoiceBox fx:id="entryStatus" prefWidth="150.0" GridPane.columnIndex="1" GridPane.columnSpan="3"
+                   GridPane.rowIndex="1"/>
+        <Label text="Progress" GridPane.rowIndex="2"/>
+        <Spinner fx:id="entryProgress" editable="true" prefHeight="28.0" prefWidth="72.0" GridPane.columnIndex="1"
+                 GridPane.rowIndex="2"/>
+        <Label text="Priority" GridPane.rowIndex="3"/>
+        <Spinner fx:id="entryPriority" editable="true" prefHeight="28.0" prefWidth="72.0" GridPane.columnIndex="1"
+                 GridPane.rowIndex="3"/>
+        <Separator prefWidth="200.0" GridPane.columnSpan="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
+        <Label styleClass="lightBackground" text="Details" GridPane.columnSpan="6" GridPane.halignment="CENTER"
+               GridPane.valignment="CENTER">
+            <GridPane.margin>
+                <Insets/>
+            </GridPane.margin>
+            <padding>
+                <Insets left="5.0" right="5.0"/>
+            </padding>
+        </Label>
+        <CheckBox fx:id="entryHide" mnemonicParsing="false" text="Hide from status list" GridPane.columnIndex="4"
+                  GridPane.columnSpan="3" GridPane.rowIndex="1"/>
+        <Label fx:id="entryProgressTotal" text="/ 0" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+        <Separator prefWidth="200.0" GridPane.columnSpan="6" GridPane.halignment="CENTER" GridPane.rowIndex="4"
+                   GridPane.valignment="CENTER"/>
+        <Label styleClass="lightBackground" text="Notes" GridPane.columnSpan="6" GridPane.halignment="CENTER"
+               GridPane.rowIndex="4" GridPane.valignment="CENTER">
+            <padding>
+                <Insets left="5.0" right="5.0"/>
+            </padding>
+        </Label>
+        <TextArea fx:id="entryNotes" prefHeight="114.0" prefWidth="397.0" GridPane.columnSpan="6" GridPane.rowIndex="5"
+                  GridPane.rowSpan="4"/>
+        <Label text="Score" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+        <Spinner fx:id="entryScore" editable="true" prefHeight="28.0" prefWidth="72.0" GridPane.columnIndex="4"
+                 GridPane.rowIndex="2"/>
+        <Label text="Repeat" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+        <Spinner fx:id="entryRepeat" editable="true" prefHeight="28.0" prefWidth="72.0" GridPane.columnIndex="4"
+                 GridPane.rowIndex="3"/>
+        <Label fx:id="entryScoreAvg" text="avg 0" GridPane.columnIndex="5" GridPane.rowIndex="2"/>
+        <CheckBox mnemonicParsing="false" text="Private" GridPane.columnIndex="5" GridPane.rowIndex="3"/>
+        <Separator prefWidth="200.0" GridPane.columnIndex="6" GridPane.columnSpan="4" GridPane.halignment="CENTER"
+                   GridPane.valignment="CENTER"/>
+        <Label styleClass="lightBackground" text="Activity reply" GridPane.columnIndex="6" GridPane.columnSpan="4"
+               GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <padding>
+                <Insets left="5.0" right="5.0"/>
+            </padding>
+        </Label>
+        <TextArea fx:id="activityReply" prefHeight="114.0" prefWidth="397.0" GridPane.columnIndex="6"
+                  GridPane.columnSpan="4" GridPane.rowIndex="1" GridPane.rowSpan="5"/>
+        <Label text="Start date" GridPane.columnIndex="6" GridPane.rowIndex="6"/>
+        <DatePicker fx:id="entryStartDate" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="6"/>
+        <Label text="End date" GridPane.columnIndex="6" GridPane.rowIndex="7"/>
+        <DatePicker fx:id="entryEndDate" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="7"/>
+        <Button fx:id="update" mnemonicParsing="false" text="Update Entry" GridPane.columnIndex="6"
+                GridPane.columnSpan="2" GridPane.rowIndex="8"/>
+        <Button fx:id="delete" mnemonicParsing="false" text="Delete Entry" GridPane.columnIndex="8"
+                GridPane.columnSpan="2" GridPane.rowIndex="8"/>
+    </children>
+    <padding>
+        <Insets left="10.0" right="10.0" top="10.0"/>
+    </padding>
 </GridPane>
