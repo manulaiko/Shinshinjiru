@@ -42,90 +42,10 @@ public class InitUserListsHandler implements ApplicationListener<InitUserListsEv
         request.setUserId(anilist.getUser().getId());
         request.setType(MediaType.ANIME);
 
-        var date = new FuzzyDateResponseProjection()
-                .month()
-                .year()
-                .day();
-
         var result = api.query(
                 new GraphQLRequest(
                         request,
-                        // rip
-                        new MediaListCollectionResponseProjection().lists(
-                                new MediaListGroupResponseProjection()
-                                        .name()
-                                        .entries(
-                                                new MediaListResponseProjection()
-                                                        .id()
-                                                        .status()
-                                                        .score()
-                                                        .progress()
-                                                        .repeat()
-                                                        .priority()
-                                                        .notes()
-                                                        .hiddenFromStatusLists()
-                                                        .customLists()
-                                                        .notes()
-                                                        .startedAt(date)
-                                                        .completedAt(date)
-                                                        .media(
-                                                                new MediaResponseProjection()
-                                                                        .studios(
-                                                                                new StudioConnectionResponseProjection()
-                                                                                        .edges(
-                                                                                                new StudioEdgeResponseProjection()
-                                                                                                        .isMain()
-                                                                                                        .node(
-                                                                                                                new StudioResponseProjection()
-                                                                                                                        .name()
-                                                                                                                        .isAnimationStudio()
-                                                                                                        )
-                                                                                        )
-                                                                        )
-                                                                        .id()
-                                                                        .title(
-                                                                                new MediaTitleResponseProjection()
-                                                                                        .userPreferred()
-                                                                        )
-                                                                        .averageScore()
-                                                                        .description()
-                                                                        .format()
-                                                                        .status()
-                                                                        .episodes()
-                                                                        .duration()
-                                                                        .coverImage(new MediaCoverImageResponseProjection()
-                                                                                            .large()
-                                                                        )
-                                                                        .season()
-                                                                        .startDate(date)
-                                                                        .synonyms()
-                                                                        .genres()
-                                                                        .tags(
-                                                                                new MediaTagResponseProjection()
-                                                                                        .name()
-                                                                                        .rank()
-                                                                                        .category()
-                                                                        )
-                                                                        .nextAiringEpisode(
-                                                                                new AiringScheduleResponseProjection()
-                                                                                        .airingAt()
-                                                                                        .episode()
-                                                                                        .timeUntilAiring()
-                                                                        )
-                                                                        .relations(
-                                                                                new MediaConnectionResponseProjection()
-                                                                                        .edges(
-                                                                                                new MediaEdgeResponseProjection()
-                                                                                                        .relationType()
-                                                                                                        .node(
-                                                                                                                new MediaResponseProjection()
-                                                                                                                        .id()
-                                                                                                        )
-                                                                                        )
-                                                                        )
-                                                        )
-                                        )
-                        )
+                        getResponseProjection()
                 ),
                 UserLists.class
         );
@@ -134,5 +54,93 @@ public class InitUserListsHandler implements ApplicationListener<InitUserListsEv
                 this,
                 result.getData().get("MediaListCollection")
         ));
+    }
+
+    /**
+     * Returns the response projection instance.
+     *
+     * @return Response projection.
+     */
+    private MediaListCollectionResponseProjection getResponseProjection() {
+        var date = new FuzzyDateResponseProjection()
+                .month()
+                .year()
+                .day();
+
+        return new MediaListCollectionResponseProjection().lists(
+                new MediaListGroupResponseProjection()
+                        .name()
+                        .entries(
+                                new MediaListResponseProjection()
+                                        .id()
+                                        .status()
+                                        .score()
+                                        .progress()
+                                        .repeat()
+                                        .priority()
+                                        .notes()
+                                        .hiddenFromStatusLists()
+                                        .customLists()
+                                        .notes()
+                                        .startedAt(date)
+                                        .completedAt(date)
+                                        .media(
+                                                new MediaResponseProjection()
+                                                        .studios(
+                                                                new StudioConnectionResponseProjection()
+                                                                        .edges(
+                                                                                new StudioEdgeResponseProjection()
+                                                                                        .isMain()
+                                                                                        .node(
+                                                                                                new StudioResponseProjection()
+                                                                                                        .name()
+                                                                                                        .isAnimationStudio()
+                                                                                        )
+                                                                        )
+                                                        )
+                                                        .id()
+                                                        .title(
+                                                                new MediaTitleResponseProjection()
+                                                                        .userPreferred()
+                                                        )
+                                                        .averageScore()
+                                                        .description()
+                                                        .format()
+                                                        .status()
+                                                        .episodes()
+                                                        .duration()
+                                                        .coverImage(new MediaCoverImageResponseProjection()
+                                                                            .large()
+                                                        )
+                                                        .season()
+                                                        .startDate(date)
+                                                        .synonyms()
+                                                        .genres()
+                                                        .tags(
+                                                                new MediaTagResponseProjection()
+                                                                        .name()
+                                                                        .rank()
+                                                                        .category()
+                                                        )
+                                                        .nextAiringEpisode(
+                                                                new AiringScheduleResponseProjection()
+                                                                        .airingAt()
+                                                                        .episode()
+                                                                        .timeUntilAiring()
+                                                        )
+                                                        .relations(
+                                                                new MediaConnectionResponseProjection()
+                                                                        .edges(
+                                                                                new MediaEdgeResponseProjection()
+                                                                                        .relationType()
+                                                                                        .node(
+                                                                                                new MediaResponseProjection()
+                                                                                                        .id()
+                                                                                        )
+                                                                        )
+                                                        )
+                                        )
+                        )
+        );
     }
 }
