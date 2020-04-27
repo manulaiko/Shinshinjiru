@@ -6,24 +6,34 @@
 <?import javafx.scene.text.*?>
 
 <BorderPane prefHeight="550.0" prefWidth="960.0" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
-      <HBox fx:id="menu" prefHeight="100.0">
-         <children>
-            <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="List" textFill="#cdcdcd" />
-            <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="Torrents" textFill="#cdcdcd" />
-            <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="Settings" textFill="#cdcdcd" />
-            <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="Browse" textFill="#cdcdcd" />
+    <top>
+        <GridPane maxHeight="230.0" prefHeight="100.0" prefWidth="960.0" styleClass="darkBackground" BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Button fx:id="listButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" style="-fx-cursor: pointer;" text="List" textFill="#cdcdcd" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Button fx:id="browseButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="Browse" textFill="#cdcdcd" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                <Button fx:id="torrentsButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="Torrents" textFill="#cdcdcd" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                <Button fx:id="settingsButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="Settings" textFill="#cdcdcd" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
 
-            <Pane HBox.hgrow="ALWAYS" />
-
-            <Label fx:id="username" alignment="CENTER" prefHeight="100.0" prefWidth="160.0">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <ImageView fx:id="avatar" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-            </ImageView>
-         </children>
-      </HBox>
-   </top>
+                <Label fx:id="username" alignment="CENTER" prefHeight="100.0" prefWidth="160.0" GridPane.columnIndex="5" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <ImageView fx:id="avatar" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.halignment="CENTER">
+                </ImageView>
+            </children>
+        </GridPane>
+    </top>
 </BorderPane>
