@@ -1,5 +1,7 @@
 package com.manulaiko.shinshinjiru.presenter.details;
 
+import com.manulaiko.shinshinjiru.ShinshinjiruApplication;
+import com.manulaiko.shinshinjiru.api.event.DeleteMediaListEntryEvent;
 import com.manulaiko.shinshinjiru.api.model.dto.FuzzyDate;
 import com.manulaiko.shinshinjiru.api.model.dto.MediaList;
 import javafx.fxml.FXML;
@@ -61,12 +63,16 @@ public class ListEntry {
     @FXML
     private Label entryScoreAvg;
 
+    private MediaList entry;
+
     /**
      * Initializes the List Entry tab.
      *
      * @param entry Entry to initialize.
      */
     public void init(MediaList entry) {
+        this.entry = entry;
+
         entryStatus.getItems().addAll(
                 "Completed",
                 "Watching",
@@ -149,7 +155,7 @@ public class ListEntry {
      * @param event Fired event.
      */
     private void delete(MouseEvent event) {
-
+        ShinshinjiruApplication.publish(new DeleteMediaListEntryEvent(this, entry));
     }
 
     /**
