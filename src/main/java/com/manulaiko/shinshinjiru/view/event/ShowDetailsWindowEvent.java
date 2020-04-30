@@ -1,8 +1,6 @@
 package com.manulaiko.shinshinjiru.view.event;
 
 import com.manulaiko.shinshinjiru.presenter.lists.TableEntry;
-import com.manulaiko.shinshinjiru.presenter.lists.TableList;
-import lombok.Data;
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 
@@ -14,16 +12,10 @@ import org.springframework.context.ApplicationEvent;
  *
  * @author Manulaiko <manulaiko@gmail.com>
  */
-@Getter
 public class ShowDetailsWindowEvent extends ApplicationEvent {
+    @Getter
     private final TableEntry entry;
 
-    /**
-     * Constructor.
-     *
-     * @param source Instance that fired the event.
-     * @param entry  Entry to display.
-     */
     public ShowDetailsWindowEvent(Object source, TableEntry entry) {
         super(source);
 

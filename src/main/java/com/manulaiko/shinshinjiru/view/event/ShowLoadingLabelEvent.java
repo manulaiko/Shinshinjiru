@@ -11,9 +11,6 @@ import org.springframework.context.ApplicationEvent;
  * @author Manulaiko <manulaiko@gmail.com>
  */
 public class ShowLoadingLabelEvent extends ApplicationEvent {
-    /**
-     * @inheritDoc
-     */
     public ShowLoadingLabelEvent(Object source) {
         super(source);
     }

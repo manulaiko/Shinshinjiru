@@ -11,9 +11,6 @@ import org.springframework.context.ApplicationEvent;
  * @author Manulaiko <manulaiko@gmail.com>
  */
 public class InitUserEvent extends ApplicationEvent {
-    /**
-     * @inheritDoc
-     */
     public InitUserEvent(Object source) {
         super(source);
     }

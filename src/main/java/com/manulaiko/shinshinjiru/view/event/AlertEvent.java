@@ -14,10 +14,10 @@ import org.springframework.context.ApplicationEvent;
  */
 public class AlertEvent extends ApplicationEvent {
     @Getter
-    private Alert.AlertType type;
+    private final Alert.AlertType type;
 
     @Getter
-    private String message;
+    private final String message;
 
     public AlertEvent(Object source, Alert.AlertType type, String message) {
         super(source);

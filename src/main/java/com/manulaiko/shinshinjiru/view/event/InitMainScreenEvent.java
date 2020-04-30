@@ -11,9 +11,6 @@ import org.springframework.context.ApplicationEvent;
  * @author Manulaiko <manulaiko@gmail.com>
  */
 public class InitMainScreenEvent extends ApplicationEvent {
-    /**
-     * @inheritDoc
-     */
     public InitMainScreenEvent(Object source) {
         super(source);
     }

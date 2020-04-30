@@ -11,9 +11,6 @@ import org.springframework.context.ApplicationEvent;
  * @author Manulaiko <manulaiko@gmail.com>
  */
 public class OauthServerStartedEvent extends ApplicationEvent {
-    /**
-     * @inheritDoc
-     */
     public OauthServerStartedEvent(Object source) {
         super(source);
     }

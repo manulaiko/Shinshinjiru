@@ -15,7 +15,7 @@ import org.springframework.context.ApplicationEvent;
  */
 public class DeleteMediaListEntryEvent extends ApplicationEvent {
     @Getter
-    private MediaList entry;
+    private final MediaList entry;
 
     public DeleteMediaListEntryEvent(Object source, MediaList entry) {
         super(source);

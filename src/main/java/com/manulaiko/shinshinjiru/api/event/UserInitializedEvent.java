@@ -13,10 +13,9 @@ import org.springframework.context.ApplicationEvent;
  *
  * @author Manulaiko <manulaiko@gmail.com>
  */
-@Getter
-@Setter
 public class UserInitializedEvent extends ApplicationEvent {
-    private User user;
+    @Getter
+    private final User user;
 
     /**
      * Constructor.
@@ -27,6 +26,6 @@ public class UserInitializedEvent extends ApplicationEvent {
     public UserInitializedEvent(Object source, User user) {
         super(source);
 
-        this.setUser(user);
+        this.user = user;
     }
 }
