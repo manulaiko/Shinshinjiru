@@ -3,7 +3,6 @@ package com.manulaiko.shinshinjiru.api.handler;
 import com.kobylynskyi.graphql.codegen.model.graphql.GraphQLRequest;
 import com.manulaiko.shinshinjiru.ShinshinjiruApplication;
 import com.manulaiko.shinshinjiru.api.APIService;
-import com.manulaiko.shinshinjiru.api.AniList;
 import com.manulaiko.shinshinjiru.api.event.InitUserListsEvent;
 import com.manulaiko.shinshinjiru.api.event.UserListsInitializedEvent;
 import com.manulaiko.shinshinjiru.api.model.dto.*;
@@ -16,7 +15,7 @@ import org.springframework.stereotype.Component;
 /**
  * Init user list handler.
  * =======================
- *
+ * <p>
  * Initializes the user's list.
  *
  * @author Manulaiko <manulaiko@gmail.com>
@@ -24,9 +23,6 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class InitUserListsHandler implements ApplicationListener<InitUserListsEvent> {
-    @Autowired
-    private AniList anilist;
-
     @Autowired
     private APIService api;
 
@@ -36,10 +32,10 @@ public class InitUserListsHandler implements ApplicationListener<InitUserListsEv
     @Override
     public void onApplicationEvent(InitUserListsEvent event) {
         log.info("Loading user lists...");
-        log.debug("User: " + anilist.getUser().getName());
+        log.debug("User: " + api.getUser().getName());
 
         var request = new MediaListCollectionQueryRequest();
-        request.setUserId(anilist.getUser().getId());
+        request.setUserId(api.getUser().getId());
         request.setType(MediaType.ANIME);
 
         var result = api.query(
@@ -110,7 +106,7 @@ public class InitUserListsHandler implements ApplicationListener<InitUserListsEv
                                                         .episodes()
                                                         .duration()
                                                         .coverImage(new MediaCoverImageResponseProjection()
-                                                                            .large()
+                                                                .large()
                                                         )
                                                         .season()
                                                         .startDate(date)

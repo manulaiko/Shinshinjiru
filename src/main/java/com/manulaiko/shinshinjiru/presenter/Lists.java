@@ -1,6 +1,6 @@
 package com.manulaiko.shinshinjiru.presenter;
 
-import com.manulaiko.shinshinjiru.api.AniList;
+import com.manulaiko.shinshinjiru.api.APIService;
 import com.manulaiko.shinshinjiru.api.event.MediaListEntryDeletedEvent;
 import com.manulaiko.shinshinjiru.api.model.dto.MediaListGroup;
 import com.manulaiko.shinshinjiru.presenter.lists.TableList;
@@ -27,7 +27,7 @@ public class Lists {
     private TabPane lists;
 
     @Autowired
-    private AniList anilist;
+    private APIService api;
 
     /**
      * Initializes the lists.
@@ -37,7 +37,7 @@ public class Lists {
         log.debug("Loading List entries...");
         var tabs = lists.getTabs();
 
-        anilist.getLists()
+        api.getLists()
                .getLists()
                .stream()
                .map(this::loadList)

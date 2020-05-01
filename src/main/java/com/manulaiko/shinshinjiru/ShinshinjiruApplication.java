@@ -2,7 +2,6 @@ package com.manulaiko.shinshinjiru;
 
 import com.manulaiko.shinshinjiru.view.SceneManager;
 import com.manulaiko.shinshinjiru.view.event.InitMainScreenEvent;
-import com.manulaiko.shinshinjiru.view.event.ShowLoadingLabelEvent;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
