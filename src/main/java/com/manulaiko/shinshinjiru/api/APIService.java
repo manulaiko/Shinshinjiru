@@ -58,14 +58,24 @@ public class APIService {
      * @return Query result.
      */
     public <T extends GraphQLResult<?>> T query(GraphQLRequest query, Class<T> type) {
-        var request = query.toString();
+        return query(query.toString(), type);
+    }
+
+    /**
+     * Executes a raw query.
+     *
+     * @param query Query to execute.
+     *
+     * @return Query result.
+     */
+    public <T extends GraphQLResult<?>> T query(String query, Class<T> type) {
         var headers = new HttpHeaders();
 
         headers.add("Authorization", "Bearer " + token.getAccessToken());
-        headers.setContentLength(request.length());
+        headers.setContentLength(query.length());
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        var entity = new HttpEntity<>(request, headers);
+        var entity = new HttpEntity<>(query, headers);
 
         var result = restTemplate.exchange(
                 URI.create(url),
