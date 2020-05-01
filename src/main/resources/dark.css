@@ -1,23 +1,44 @@
-* {
+.root {
     textColor: #cdcdcd;
     darkColor: #1f232d;
     lightColor: #272c38;
 
-    -fx-text-fill: textColor;
-    -fx-background-color: transparent;
-    -fx-table-cell-border-color: transparent;
+    -fx-base: darkColor;
+    -fx-background: lightColor;
+    -fx-control-inner-background: darkColor;
+    -fx-control-inner-background-alt: lightColor;
+
+    -fx-dark-text-color: textColor;
+    -fx-mid-text-color: textColor;
+    -fx-light-text-color: textColor;
+
+    -fx-hover-base: lightColor;
+    -fx-pressed-base: derive(lightColor,-6%);
+
+
+    -fx-box-border: transparent;
+    -fx-text-box-border: transparent;
+    -fx-shadow-highlight-color: transparent;
+    -fx-outer-border: transparent;
+    -fx-inner-border:transparent;
+    -fx-inner-border-horizontal: transparent;
+    -fx-inner-border-bottomup: transparent;
+
+    -fx-body-color: -fx-color;
+    -fx-body-color-bottomup: -fx-color;
+    -fx-body-color-to-right: -fx-color;
+
+    -fx-mark-color: textColor;
+
+    -fx-selection-bar-non-focused: darkColor;
+
+    -fx-cell-focus-inner-border: transparent;
+    -fx-page-bullet-border: transparent;
+    -fx-page-indicator-hover-border: transparent;
 }
 
-Button, #menu, .tab-header-background, .tab, .control-buttons-tab, .menu-item, .tab-header, .darkBackground, .table-row-cell :even, TextArea, CheckBox .box, ChoiceBox, .text-field, DatePicker {
-    -fx-background-color: darkColor;
-}
-
-BorderPane, DialogPane, .lightBackground, .table-row-cell :odd {
+.lightBackground {
     -fx-background-color: lightColor;
-}
-
-.arrow, .thumb, .increment-arrow, .decrement-arrow {
-    -fx-background-color: textColor;
 }
 
 Button {
@@ -26,7 +47,38 @@ Button {
 
 #loading {
     -fx-background-color: lightcolor;
-    -fx-text-fill: #a6a7b2;
+    -fx-text-fill: textColor;
     -fx-font-weight: bold;
     -fx-font-size: 32;
+}
+
+.date-picker-popup > .left-arrow,
+.date-picker-popup > .right-arrow,
+.date-picker-popup > * > .spinner > .button > .right-arrow,
+.date-picker-popup > * > .spinner > .button > .left-arrow,
+.separator > .line,
+.arrow, .thumb, .increment-arrow, .decrement-arrow {
+    -fx-background-color: textColor;
+}
+
+.date-picker-popup > * > .day-name-cell {
+    -fx-text-fill: textColor;
+}
+
+.date-picker > .text-field,
+.date-picker-popup > .calendar-grid,
+.date-picker-popup > .month-year-pane,
+.tab-pane > .tab-header-area > *,
+.darkBackground {
+    -fx-background-color: darkColor;
+}
+
+.date-picker-popup > * > .previous-month,
+.date-picker-popup > * > .next-month {
+    -fx-background-color: lightColor;
+    -fx-text-fill: derive(textColor, -60%);
+}
+
+.date-picker-popup > * > .day-cell {
+    -fx-border-color: lightColor;
 }
