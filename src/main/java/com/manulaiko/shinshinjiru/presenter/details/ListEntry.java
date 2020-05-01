@@ -1,12 +1,16 @@
 package com.manulaiko.shinshinjiru.presenter.details;
 
 import com.manulaiko.shinshinjiru.ShinshinjiruApplication;
-import com.manulaiko.shinshinjiru.api.event.DeleteMediaListEntryEvent;
+import com.manulaiko.shinshinjiru.api.event.*;
 import com.manulaiko.shinshinjiru.api.model.dto.FuzzyDate;
 import com.manulaiko.shinshinjiru.api.model.dto.MediaList;
+import com.manulaiko.shinshinjiru.api.model.dto.MediaListStatus;
+import com.manulaiko.shinshinjiru.view.event.ConfirmAlertEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Controller;
 
 import java.time.LocalDate;
@@ -20,6 +24,7 @@ import java.time.LocalDate;
  * @author Manulaiko <manulaiko@gmail.com>
  */
 @Controller
+@Slf4j
 public class ListEntry {
     @FXML
     private ChoiceBox<String> entryStatus;
@@ -42,8 +47,8 @@ public class ListEntry {
     @FXML
     private TextArea entryNotes;
 
-    //@FXML
-    //private TextArea activityReply;
+    @FXML
+    private TextArea activityReply;
 
     @FXML
     private DatePicker entryStartDate;
@@ -146,7 +151,44 @@ public class ListEntry {
      * @param event Fired event.
      */
     private void update(MouseEvent event) {
+        entry.setStatus(switch (entryStatus.getValue()) {
+            case "Completed" -> MediaListStatus.COMPLETED;
+            case "Watching" -> MediaListStatus.CURRENT;
+            case "Paused" -> MediaListStatus.PAUSED;
+            case "Dropped" -> MediaListStatus.DROPPED;
+            case "Plan to Watch" -> MediaListStatus.PLANNING;
+            case "Repeating" -> MediaListStatus.REPEATING;
+            default -> throw new IllegalStateException("Unexpected value: " + entryStatus.getValue());
+        });
 
+        entry.setHiddenFromStatusLists(entryHide.isSelected());
+        entry.setProgress(entryProgress.getValue());
+        entry.setScore(entryScore.getValue());
+        entry.setRepeat(entryRepeat.getValue());
+        entry.setPriority(entryPriority.getValue());
+        entry.setNotes(entryNotes.getText());
+        entry.setStartedAt(getDate(entryStartDate));
+        entry.setCompletedAt(getDate(entryEndDate));
+
+        ShinshinjiruApplication.publish(new UpdateMediaListEntryEvent(this, entry));
+    }
+
+    /**
+     * Adds the activity reply.
+     *
+     * @param event Fired event.
+     */
+    @EventListener
+    public void replyActivity(MediaListEntryUpdated event) {
+        ShinshinjiruApplication.publish(new ConfirmAlertEvent(this, "Entry successfully updated!"));
+
+        if (!this.activityReply.getText().isBlank()) {
+            ShinshinjiruApplication.publish(new GetLastListActivity(
+                    this,
+                    event.getEntry(),
+                    a -> ShinshinjiruApplication.publish(new ReplyActivityEvent(this, a, activityReply.getText()))
+            ));
+        }
     }
 
     /**
@@ -170,5 +212,25 @@ public class ListEntry {
         }
 
         field.setValue(LocalDate.of(date.getYear(), date.getMonth(), date.getDay()));
+    }
+
+    /**
+     * Returns a date from a field.
+     *
+     * @param field Field to get.
+     * @return Field's date.
+     */
+    private FuzzyDate getDate(DatePicker field) {
+        try {
+            var date = field.getValue();
+
+            return new FuzzyDate.Builder()
+                    .setDay(date.getDayOfMonth())
+                    .setMonth(date.getMonthValue())
+                    .setYear(date.getYear())
+                    .build();
+        } catch (NullPointerException e) {
+            return null;
+        }
     }
 }
