@@ -5,10 +5,14 @@ import com.manulaiko.shinshinjiru.presenter.lists.TableEntry;
 import com.manulaiko.shinshinjiru.view.SceneManager;
 import com.manulaiko.shinshinjiru.view.event.ShowDetailsWindowEvent;
 import javafx.application.Platform;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 /**
@@ -24,6 +28,9 @@ import org.springframework.stereotype.Component;
 public class ShowDetailsWindowHandler implements ApplicationListener<ShowDetailsWindowEvent> {
     @Autowired
     private SceneManager sceneManager;
+
+    @Value("classpath:icon.png")
+    private Resource icon;
 
     private TableEntry entry;
 
@@ -41,6 +48,7 @@ public class ShowDetailsWindowHandler implements ApplicationListener<ShowDetails
     /**
      * Builds and shows the Details window.
      */
+    @SneakyThrows
     private void show() {
         var stage      = new Stage();
         var scene      = sceneManager.buildScene("Details.fxml");
@@ -51,6 +59,8 @@ public class ShowDetailsWindowHandler implements ApplicationListener<ShowDetails
         controller.init();
 
         stage.setScene(scene);
+        stage.getIcons().add(new Image(icon.getInputStream()));
+        stage.setTitle("Shinshinjiru - " + entry.getName().getValue());
         stage.show();
     }
 }

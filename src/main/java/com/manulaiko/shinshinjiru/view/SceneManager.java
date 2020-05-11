@@ -3,12 +3,14 @@ package com.manulaiko.shinshinjiru.view;
 import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.SubScene;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import lombok.Data;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -32,6 +34,9 @@ public class SceneManager {
     private Stage rootStage;
     private String rootScene;
 
+    @Value("classpath:icon.png")
+    private Resource icon;
+
     /**
      * Shows the window with the root scene.
      */
@@ -42,13 +47,16 @@ public class SceneManager {
     /**
      * Shows the root scene in the FX thread.
      */
+    @SneakyThrows
     private void doShow() {
         var scene = scenes.computeIfAbsent(this.getRootScene(), this::buildScene);
         scene.getStylesheets().addAll("dark.css");
 
         log.debug("Showing root scene...");
         this.getRootStage().setScene(scene);
+        this.rootStage.setTitle("Shinshinjiru");
         this.getRootStage().show();
+        this.rootStage.getIcons().add(new Image(icon.getInputStream()));
     }
 
     /**

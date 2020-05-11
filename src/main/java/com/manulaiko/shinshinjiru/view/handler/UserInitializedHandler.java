@@ -39,6 +39,7 @@ public class UserInitializedHandler implements ApplicationListener<UserInitializ
             avatar.setImage(new Image(event.getUser().getAvatar().getMedium()));
 
             sceneManager.show("List.fxml");
+            sceneManager.getRootStage().setTitle("Shinshinjiru - "+ event.getUser().getName());
         });
     }
 }

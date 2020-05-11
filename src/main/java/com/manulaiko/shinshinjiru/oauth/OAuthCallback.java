@@ -57,7 +57,6 @@ public class OAuthCallback implements HttpHandler {
         var response = restTemplate.postForObject(url, request, APIToken.class);
         service.setToken(response);
         log.debug("AuthToken received: " + response);
-        ShinshinjiruApplication.publish(new InitUserEvent(this));
 
         httpExchange.sendResponseHeaders(200, message.length());
         var out = httpExchange.getResponseBody();
@@ -66,5 +65,7 @@ public class OAuthCallback implements HttpHandler {
         out.close();
 
         ShinshinjiruApplication.publish(new StopOauthServerEvent(this));
+
+        ShinshinjiruApplication.publish(new InitUserEvent(this));
     }
 }
