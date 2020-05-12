@@ -3,10 +3,7 @@ package com.manulaiko.shinshinjiru.api;
 import com.kobylynskyi.graphql.codegen.model.graphql.GraphQLRequest;
 import com.kobylynskyi.graphql.codegen.model.graphql.GraphQLResult;
 import com.manulaiko.shinshinjiru.ShinshinjiruApplication;
-import com.manulaiko.shinshinjiru.api.event.InitUserEvent;
-import com.manulaiko.shinshinjiru.api.event.InitUserListsEvent;
-import com.manulaiko.shinshinjiru.api.event.UserInitializedEvent;
-import com.manulaiko.shinshinjiru.api.event.UserListsInitializedEvent;
+import com.manulaiko.shinshinjiru.api.event.*;
 import com.manulaiko.shinshinjiru.api.model.dto.MediaListCollection;
 import com.manulaiko.shinshinjiru.api.model.dto.User;
 import lombok.Data;
@@ -39,7 +36,7 @@ public class APIService {
     @Value("${api.url}")
     private String url;
 
-    private RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate = new RestTemplate();
 
     /**
      * The user instance.
@@ -92,34 +89,6 @@ public class APIService {
     }
 
     /**
-     * Returns the user.
-     *
-     * @return The authenticated user.
-     */
-    public User getUser() {
-        if (user == null) {
-            ShinshinjiruApplication.publish(new InitUserEvent(this));
-        }
-
-        return user;
-    }
-
-    /**
-     * Returns the lists.
-     *
-     * @return Authenticated user's lists.
-     */
-    public MediaListCollection getLists() {
-        log.info("Retrieving lists");
-        if (lists == null) {
-            ShinshinjiruApplication.publish(new InitUserListsEvent(this));
-        }
-
-        log.info("Lists loaded!");
-        return lists;
-    }
-
-    /**
      * Sets the User instance when the user is initialized.
      *
      * @param event Fired event.
@@ -128,6 +97,8 @@ public class APIService {
     public void userInitializedHandler(UserInitializedEvent event) {
         log.info("User initialized.");
         user = event.getUser();
+
+        ShinshinjiruApplication.publish(new PostUserInitializedEvent(this, user));
     }
 
     /**
@@ -139,5 +110,7 @@ public class APIService {
     public void userListsInitializedHandler(UserListsInitializedEvent event) {
         log.debug("User lists initialized!");
         lists = event.getLists();
+
+        ShinshinjiruApplication.publish(new PostUserListsInitializedEvent(this, lists));
     }
 }

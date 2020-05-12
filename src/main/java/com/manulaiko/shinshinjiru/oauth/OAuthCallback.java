@@ -4,6 +4,7 @@ import com.manulaiko.shinshinjiru.ShinshinjiruApplication;
 import com.manulaiko.shinshinjiru.api.APIService;
 import com.manulaiko.shinshinjiru.api.APIToken;
 import com.manulaiko.shinshinjiru.api.event.InitUserEvent;
+import com.manulaiko.shinshinjiru.api.event.InitUserListsEvent;
 import com.manulaiko.shinshinjiru.oauth.event.StopOauthServerEvent;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;

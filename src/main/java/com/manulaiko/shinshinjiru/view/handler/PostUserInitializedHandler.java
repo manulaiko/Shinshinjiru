@@ -1,6 +1,6 @@
 package com.manulaiko.shinshinjiru.view.handler;
 
-import com.manulaiko.shinshinjiru.api.event.UserInitializedEvent;
+import com.manulaiko.shinshinjiru.api.event.PostUserInitializedEvent;
 import com.manulaiko.shinshinjiru.view.SceneManager;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
@@ -12,8 +12,8 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
 /**
- * User initialized event.
- * =======================
+ * Post user initialized event.
+ * ============================
  *
  * Updates the GUI with user's info.
  *
@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Slf4j
-public class UserInitializedHandler implements ApplicationListener<UserInitializedEvent> {
+public class PostUserInitializedHandler implements ApplicationListener<PostUserInitializedEvent> {
     @Autowired
     private SceneManager sceneManager;
 
@@ -29,7 +29,7 @@ public class UserInitializedHandler implements ApplicationListener<UserInitializ
      * @inheritDoc
      */
     @Override
-    public void onApplicationEvent(UserInitializedEvent event) {
+    public void onApplicationEvent(PostUserInitializedEvent event) {
         log.debug("Updating user info...");
         Platform.runLater(() -> {
             var username = (Label)sceneManager.getRootStage().getScene().lookup("#username");
@@ -38,7 +38,6 @@ public class UserInitializedHandler implements ApplicationListener<UserInitializ
             var avatar = (ImageView)sceneManager.getRootStage().getScene().lookup("#avatar");
             avatar.setImage(new Image(event.getUser().getAvatar().getMedium()));
 
-            sceneManager.show("List.fxml");
             sceneManager.getRootStage().setTitle("Shinshinjiru - "+ event.getUser().getName());
         });
     }
