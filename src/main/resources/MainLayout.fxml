@@ -25,7 +25,7 @@
                 <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Button fx:id="listButton" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-cursor: pointer;" styleClass="darkBackground" text="List" textFill="#cdcdcd" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Button fx:id="listButton" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" styleClass="darkBackground" text="List" textFill="#cdcdcd" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                 <Button fx:id="browseButton" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" styleClass="darkBackground" text="Browse" textFill="#cdcdcd" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                 <Button fx:id="torrentsButton" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" styleClass="darkBackground" text="Torrents" textFill="#cdcdcd" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
                 <Button fx:id="settingsButton" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" styleClass="darkBackground" text="Settings" textFill="#cdcdcd" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
