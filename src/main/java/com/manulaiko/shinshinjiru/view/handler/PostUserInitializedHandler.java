@@ -31,14 +31,16 @@ public class PostUserInitializedHandler implements ApplicationListener<PostUserI
     @Override
     public void onApplicationEvent(PostUserInitializedEvent event) {
         log.debug("Updating user info...");
-        Platform.runLater(() -> {
-            var username = (Label)sceneManager.getRootStage().getScene().lookup("#username");
-            username.setText(event.getUser().getName());
+        Platform.runLater(() -> show(event));
+    }
 
-            var avatar = (ImageView)sceneManager.getRootStage().getScene().lookup("#avatar");
-            avatar.setImage(new Image(event.getUser().getAvatar().getMedium()));
+    private void show(PostUserInitializedEvent event) {
+        var username = (Label)sceneManager.getRootStage().getScene().lookup("#username");
+        username.setText(event.getUser().getName());
 
-            sceneManager.getRootStage().setTitle("Shinshinjiru - "+ event.getUser().getName());
-        });
+        var avatar = (ImageView)sceneManager.getRootStage().getScene().lookup("#avatar");
+        avatar.setImage(new Image(event.getUser().getAvatar().getMedium()));
+
+        sceneManager.getRootStage().setTitle("Shinshinjiru - "+ event.getUser().getName());
     }
 }

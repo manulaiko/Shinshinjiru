@@ -1,68 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.Group?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="550.0" prefWidth="960.0" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/11.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manulaiko.shinshinjiru.presenter.MainLayout">
+<BorderPane prefHeight="550.0" prefWidth="960.0" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manulaiko.shinshinjiru.presenter.MainLayout">
     <top>
-        <GridPane maxHeight="230.0" prefHeight="100.0" prefWidth="960.0" styleClass="darkBackground"
-                  BorderPane.alignment="CENTER">
+        <GridPane maxHeight="230.0" prefHeight="100.0" prefWidth="960.0" styleClass="darkBackground" BorderPane.alignment="CENTER">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0"
-                                   prefWidth="130.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="130.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
             </rowConstraints>
-            <Button fx:id="listButton" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0"
-                    styleClass="darkBackground" text="List" textFill="#cdcdcd" GridPane.halignment="CENTER"
-                    GridPane.valignment="CENTER"/>
-            <Button fx:id="browseButton" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0"
-                    styleClass="darkBackground" text="Browse" textFill="#cdcdcd" GridPane.columnIndex="1"
-                    GridPane.halignment="CENTER"/>
-            <Button fx:id="torrentsButton" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0"
-                    styleClass="darkBackground" text="Torrents" textFill="#cdcdcd" GridPane.columnIndex="2"
-                    GridPane.halignment="CENTER"/>
+            <Button fx:id="listButton" mnemonicParsing="false" onAction="#onListButton" prefHeight="90.0" prefWidth="90.0" styleClass="darkBackground" text="List" textFill="#cdcdcd" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button fx:id="browseButton" mnemonicParsing="false" onAction="#onBrowseButton" prefHeight="90.0" prefWidth="90.0" styleClass="darkBackground" text="Browse" textFill="#cdcdcd" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+            <Button fx:id="torrentsButton" mnemonicParsing="false" onAction="#onTorrentsButton" prefHeight="90.0" prefWidth="90.0" styleClass="darkBackground" text="Torrents" textFill="#cdcdcd" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
 
-            <Label fx:id="username" alignment="CENTER" prefHeight="100.0" prefWidth="160.0" GridPane.columnIndex="4"
-                   GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+            <Label fx:id="username" alignment="CENTER" prefHeight="100.0" prefWidth="160.0" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
                 <font>
-                    <Font name="System Bold" size="18.0"/>
+                    <Font name="System Bold" size="18.0" />
                 </font>
             </Label>
-            <Group GridPane.columnIndex="5" GridPane.halignment="RIGHT" fx:id="avatarCol">
+            <Group fx:id="avatarCol" GridPane.columnIndex="5" GridPane.halignment="RIGHT">
                 <children>
-                    <ImageView fx:id="avatar" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true"
-                               preserveRatio="true" style="-fx-cursor: hand;"/>
+                    <ImageView fx:id="avatar" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" />
                     <Label layoutX="101.0" layoutY="38.0" text="⌄">
                         <font>
-                            <Font name="System Bold" size="16.0"/>
+                            <Font name="System Bold" size="16.0" />
                         </font>
                         <padding>
-                            <Insets left="10.0"/>
+                            <Insets left="10.0" />
                         </padding>
                     </Label>
                 </children>
                 <cursor>
-                    <Cursor fx:constant="HAND"/>
+                    <Cursor fx:constant="HAND" />
                 </cursor>
                 <GridPane.margin>
-                    <Insets right="10.0"/>
+                    <Insets right="10.0" />
                 </GridPane.margin>
             </Group>
         </GridPane>

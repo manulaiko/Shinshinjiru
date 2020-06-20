@@ -27,7 +27,6 @@ public class ShowLoadingLabelHandler implements ApplicationListener<ShowLoadingL
     @Override
     public void onApplicationEvent(ShowLoadingLabelEvent event) {
         log.info("Loading...");
-        sceneManager.show();
         sceneManager.show("LoadingLabel.fxml");
     }
 }

@@ -6,6 +6,7 @@ import com.manulaiko.shinshinjiru.ShinshinjiruApplication;
 import com.manulaiko.shinshinjiru.api.event.*;
 import com.manulaiko.shinshinjiru.api.model.dto.MediaListCollection;
 import com.manulaiko.shinshinjiru.api.model.dto.User;
+import com.manulaiko.shinshinjiru.view.event.ShowListViewEvent;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -111,6 +112,6 @@ public class APIService {
         log.debug("User lists initialized!");
         lists = event.getLists();
 
-        ShinshinjiruApplication.publish(new PostUserListsInitializedEvent(this, lists));
+        ShinshinjiruApplication.publish(new ShowListViewEvent(this));
     }
 }

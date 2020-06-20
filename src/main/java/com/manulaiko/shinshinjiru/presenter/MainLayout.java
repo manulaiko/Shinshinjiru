@@ -1,11 +1,12 @@
 package com.manulaiko.shinshinjiru.presenter;
 
-import com.manulaiko.shinshinjiru.view.ContextAwareFXMLLoader;
+import com.manulaiko.shinshinjiru.ShinshinjiruApplication;
 import com.manulaiko.shinshinjiru.view.SceneManager;
+import com.manulaiko.shinshinjiru.view.event.ShowLoadingLabelEvent;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.stage.Popup;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -53,5 +54,20 @@ public class MainLayout {
 
             log.debug("AvatarCol shown at " + x + ":" + y);
         });
+    }
+
+    @FXML
+    public void onListButton() {
+        Platform.runLater(() -> sceneManager.show("List.fxml"));
+    }
+
+    @FXML
+    public void onBrowseButton() {
+        ShinshinjiruApplication.publish(new ShowLoadingLabelEvent(this));
+    }
+
+    @FXML
+    public void onTorrentsButton() {
+        ShinshinjiruApplication.publish(new ShowLoadingLabelEvent(this));
     }
 }

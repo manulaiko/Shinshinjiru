@@ -18,7 +18,7 @@ import javax.validation.Valid;
 /**
  * Alert handler.
  * ==============
- *
+ * <p>
  * Shows an alert.
  *
  * @author Manulaiko <manulaiko@gmail.com>
