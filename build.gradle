@@ -40,7 +40,7 @@ javafx {
 sourceSets {
     main {
         java {
-            srcDirs = ['src/main/java', '$buildDir/generated/graphql']
+            srcDirs = ['src/main/java', "$buildDir/generated/graphql"]
         }
         resources {
             srcDirs = ['src/main/resources']
