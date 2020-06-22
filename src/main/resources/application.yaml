@@ -4,7 +4,8 @@ spring:
 
 logging:
   level:
-    root: debug
+    com.manulaiko.shinshinjiru: debug
+    root: warn
 
 oauth:
   port: 9876
