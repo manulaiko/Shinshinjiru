@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 /**
  * Delete MediaList entry handler.
  * ===============================
- *
+ * <p>
  * Deletes an entry from the user's media list.
  *
  * @author Manulaiko <manulaiko@gmail.com>
@@ -34,12 +34,12 @@ public class DeleteMediaListEntryHandler implements ApplicationListener<DeleteMe
     public void onApplicationEvent(DeleteMediaListEntryEvent event) {
         log.debug("Deleting " + event.getEntry().getMedia().getTitle().getUserPreferred() + "...");
 
-        var request = new DeleteMediaListEntryMutationRequest();
-        request.setId(event.getEntry().getId());
+        var request = new DeleteMediaListEntryMutationRequest.Builder()
+                .setId(event.getEntry().getId());
 
         var result = api.query(
                 new GraphQLRequest(
-                        request,
+                        request.build(),
                         new DeletedResponseProjection().deleted()
                 ),
                 Deleted.class

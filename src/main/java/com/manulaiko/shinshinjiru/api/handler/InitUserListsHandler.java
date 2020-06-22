@@ -34,13 +34,13 @@ public class InitUserListsHandler implements ApplicationListener<InitUserListsEv
         log.info("Loading user lists...");
         log.debug("User: " + api.getUser().getName());
 
-        var request = new MediaListCollectionQueryRequest();
-        request.setUserId(api.getUser().getId());
-        request.setType(MediaType.ANIME);
+        var request = new MediaListCollectionQueryRequest.Builder()
+                .setUserId(api.getUser().getId())
+                .setType(MediaType.ANIME);
 
         var result = api.query(
                 new GraphQLRequest(
-                        request,
+                        request.build(),
                         getResponseProjection()
                 ),
                 UserLists.class

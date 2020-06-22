@@ -8,14 +8,11 @@ import com.manulaiko.shinshinjiru.api.event.UpdateMediaListEntryEvent;
 import com.manulaiko.shinshinjiru.api.model.dto.FuzzyDateInput;
 import com.manulaiko.shinshinjiru.api.model.dto.MediaListResponseProjection;
 import com.manulaiko.shinshinjiru.api.model.dto.SaveMediaListEntryMutationRequest;
-import com.manulaiko.shinshinjiru.api.model.dto.UpdateMediaListEntriesMutationRequest;
 import com.manulaiko.shinshinjiru.api.query.Updated;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
-
-import java.util.Collections;
 
 /**
  * Update MediaList entry handler.
@@ -39,17 +36,16 @@ public class UpdateMediaListEntryHandler implements ApplicationListener<UpdateMe
         var entry = event.getEntry();
 
         log.debug("Updating "+ entry.getMedia().getTitle().getUserPreferred());
-        var request = new SaveMediaListEntryMutationRequest();
-        request.setId(entry.getId());
-
-        request.setStatus(entry.getStatus());
-        request.setHiddenFromStatusLists(entry.getHiddenFromStatusLists());
-        request.setProgress(entry.getProgress());
-        request.setScore(entry.getScore());
-        request.setPriority(entry.getPriority());
-        request.setRepeat(entry.getRepeat());
-        request.setPrivate(entry.getPrivate());
-        request.setNotes(entry.getNotes());
+        var request = new SaveMediaListEntryMutationRequest.Builder()
+                .setId(entry.getId())
+                .setStatus(entry.getStatus())
+                .setHiddenFromStatusLists(entry.getHiddenFromStatusLists())
+                .setProgress(entry.getProgress())
+                .setScore(entry.getScore())
+                .setPriority(entry.getPriority())
+                .setRepeat(entry.getRepeat())
+                .setPrivate(entry.getPrivate())
+                .setNotes(entry.getNotes());
 
         if (entry.getCompletedAt() != null) {
             request.setCompletedAt(
@@ -72,7 +68,7 @@ public class UpdateMediaListEntryHandler implements ApplicationListener<UpdateMe
         }
 
         var result = api.query(
-                new GraphQLRequest(request, new MediaListResponseProjection().id()),
+                new GraphQLRequest(request.build(), new MediaListResponseProjection().id()),
                 Updated.class
         );
 

@@ -27,12 +27,12 @@ public class ReplyActivityHandler implements ApplicationListener<ReplyActivityEv
 
     @Override
     public void onApplicationEvent(ReplyActivityEvent event) {
-        var request = new SaveActivityReplyMutationRequest();
-        request.setActivityId(event.getActivity().getId());
-        request.setText(event.getText());
+        var request = new SaveActivityReplyMutationRequest.Builder()
+                .setActivityId(event.getActivity().getId())
+                .setText(event.getText());
 
         var result = api.query(new GraphQLRequest(
-                        request,
+                        request.build(),
                         new ActivityReplyResponseProjection().id()
                 ),
                 ActivityReplyQuery.class
