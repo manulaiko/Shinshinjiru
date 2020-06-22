@@ -57,7 +57,7 @@ public class APIService {
      * @return Query result.
      */
     public <T extends GraphQLResult<?>> T query(GraphQLRequest query, Class<T> type) {
-        return query(query.toString(), type);
+        return query(query.toHttpJsonBody(), type);
     }
 
     /**
