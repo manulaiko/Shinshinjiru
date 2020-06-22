@@ -1,5 +1,6 @@
 package com.manulaiko.shinshinjiru.oauth;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.manulaiko.shinshinjiru.ShinshinjiruApplication;
 import com.manulaiko.shinshinjiru.api.APIService;
 import com.manulaiko.shinshinjiru.api.APIToken;
@@ -9,6 +10,7 @@ import com.manulaiko.shinshinjiru.oauth.event.StopOauthServerEvent;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.configuration2.FileBasedConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -40,6 +42,9 @@ public class OAuthCallback implements HttpHandler {
     @Autowired
     private OAuthTokenRequest request;
 
+    @Autowired
+    private FileBasedConfiguration config;
+
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
         String[] params = httpExchange.getRequestURI()
@@ -51,13 +56,14 @@ public class OAuthCallback implements HttpHandler {
         }
 
         log.debug("Received OAuth callback with code " + params[1]);
-
         var restTemplate = new RestTemplateBuilder().build();
 
         request.setCode(params[1]);
         log.info("Executing AuthToken request...");
-        var response = restTemplate.postForObject(url, request, APIToken.class);
-        service.setToken(response);
+        var response = restTemplate.postForObject(url, request, String.class);
+
+        config.setProperty("api.token", response);
+        service.setToken(new ObjectMapper().readValue(response, APIToken.class));
         log.debug("AuthToken received: " + response);
 
         httpExchange.sendResponseHeaders(200, message.length());
