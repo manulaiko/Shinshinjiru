@@ -2,4 +2,4 @@
 
 <?import javafx.scene.control.*?>
 
-<TabPane fx:id="lists" fx:controller="com.manulaiko.shinshinjiru.presenter.Lists" prefHeight="450.0" prefWidth="960.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal" />
+<TabPane fx:id="mediaLists" fx:controller="com.manulaiko.shinshinjiru.presenter.Lists" prefHeight="450.0" prefWidth="960.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal" />
