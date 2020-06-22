@@ -39,16 +39,16 @@ public class Details {
      * Initializes the window content.
      */
     public void init() {
-        var entry = this.entry.getEntry().getMedia();
+        var media = this.entry.getEntry().getMedia();
 
         var titleStr = "";
-        if (entry.getTitle() != null && entry.getTitle().getUserPreferred() != null) {
-            titleStr = entry.getTitle().getUserPreferred();
+        if (media.getTitle() != null && media.getTitle().getUserPreferred() != null) {
+            titleStr = media.getTitle().getUserPreferred();
         }
 
         var imageUrl = "";
-        if (entry.getCoverImage() != null && entry.getCoverImage().getLarge() != null) {
-            imageUrl = entry.getCoverImage().getLarge();
+        if (media.getCoverImage() != null && media.getCoverImage().getLarge() != null) {
+            imageUrl = media.getCoverImage().getLarge();
         }
 
         title.setText(titleStr);
@@ -56,7 +56,7 @@ public class Details {
                 new Image(imageUrl)
         );
 
-        infoTabController.init(entry);
+        infoTabController.init(media);
         entryTabController.init(this.entry.getEntry());
     }
 }

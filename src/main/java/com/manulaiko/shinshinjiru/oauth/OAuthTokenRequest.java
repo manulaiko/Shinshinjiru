@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Data
+@SuppressWarnings("java:S1104")
 public class OAuthTokenRequest {
     @Value("${oauth.request.grant-type}")
     @JsonProperty("grant_type")

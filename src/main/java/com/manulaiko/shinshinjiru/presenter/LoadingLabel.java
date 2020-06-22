@@ -1,8 +1,8 @@
 package com.manulaiko.shinshinjiru.presenter;
 
+import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
@@ -33,7 +33,7 @@ public class LoadingLabel {
         transition.setDuration(Duration.seconds(2));
         transition.setDelay(Duration.ZERO);
         transition.setInterpolator(Interpolator.LINEAR);
-        transition.setCycleCount(Timeline.INDEFINITE);
+        transition.setCycleCount(Animation.INDEFINITE);
         transition.play();
     }
 }

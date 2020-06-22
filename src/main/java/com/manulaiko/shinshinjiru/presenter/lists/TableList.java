@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  *
  * @author Manulaiko <manulaiko@gmail.com>
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked", "java:S110"})
 @Slf4j
 public class TableList extends TableView<TableEntry> {
     private String name;

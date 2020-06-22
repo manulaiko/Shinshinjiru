@@ -1,6 +1,5 @@
 package com.manulaiko.shinshinjiru.api.event;
 
-import com.manulaiko.shinshinjiru.api.APIService;
 import com.manulaiko.shinshinjiru.api.model.dto.User;
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
@@ -13,6 +12,7 @@ import org.springframework.context.ApplicationEvent;
  *
  * @author Manulaiko <manulaiko@gmail.com>
  */
+@SuppressWarnings("java:S1948")
 public class PostUserInitializedEvent extends ApplicationEvent {
     @Getter
     private final User user;

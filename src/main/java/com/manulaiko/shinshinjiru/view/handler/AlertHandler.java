@@ -1,6 +1,5 @@
 package com.manulaiko.shinshinjiru.view.handler;
 
-
 import com.manulaiko.shinshinjiru.view.event.AlertEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -12,8 +11,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
-
-import javax.validation.Valid;
 
 /**
  * Alert handler.

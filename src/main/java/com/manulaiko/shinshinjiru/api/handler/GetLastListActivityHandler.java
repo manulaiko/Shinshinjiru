@@ -1,10 +1,7 @@
 package com.manulaiko.shinshinjiru.api.handler;
 
-import com.kobylynskyi.graphql.codegen.model.graphql.GraphQLRequest;
 import com.manulaiko.shinshinjiru.api.APIService;
 import com.manulaiko.shinshinjiru.api.event.GetLastListActivity;
-import com.manulaiko.shinshinjiru.api.model.dto.ActivityQueryRequest;
-import com.manulaiko.shinshinjiru.api.model.dto.ListActivityResponseProjection;
 import com.manulaiko.shinshinjiru.api.query.ListActivity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;

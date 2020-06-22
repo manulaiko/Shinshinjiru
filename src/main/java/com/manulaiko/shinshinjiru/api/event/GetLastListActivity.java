@@ -15,6 +15,7 @@ import java.util.function.Consumer;
  *
  * @author Manulaiko.
  */
+@SuppressWarnings("java:S1948")
 public class GetLastListActivity extends ApplicationEvent {
     @Getter
     private final MediaList entry;

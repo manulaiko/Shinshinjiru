@@ -1,9 +1,7 @@
 package com.manulaiko.shinshinjiru.api.event;
 
 import com.manulaiko.shinshinjiru.api.model.dto.MediaListCollection;
-import lombok.Data;
 import lombok.Getter;
-import lombok.Setter;
 import org.springframework.context.ApplicationEvent;
 
 /**
@@ -14,6 +12,7 @@ import org.springframework.context.ApplicationEvent;
  *
  * @author Manulaiko <manulaiko@gmail.com>
  */
+@SuppressWarnings("java:S1948")
 public class UserListsInitializedEvent extends ApplicationEvent {
     @Getter
     private final MediaListCollection lists;

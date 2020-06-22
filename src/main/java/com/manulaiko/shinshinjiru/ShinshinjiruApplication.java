@@ -67,6 +67,7 @@ public class ShinshinjiruApplication extends Application {
      * @inheritDoc
      */
     @Override
+    @SuppressWarnings("java:S2696")
     public void init() {
         applicationContext               = new SpringApplicationBuilder(ShinshinjiruApplication.class).run();
         ShinshinjiruApplication.instance = this;

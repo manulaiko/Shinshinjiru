@@ -6,6 +6,7 @@ import com.manulaiko.shinshinjiru.ShinshinjiruApplication;
 import com.manulaiko.shinshinjiru.api.event.*;
 import com.manulaiko.shinshinjiru.api.model.dto.MediaListCollection;
 import com.manulaiko.shinshinjiru.api.model.dto.User;
+import com.manulaiko.shinshinjiru.exception.APIQueryException;
 import com.manulaiko.shinshinjiru.view.event.ShowListViewEvent;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -83,7 +84,7 @@ public class APIService {
         ).getBody();
 
         if (result != null && result.hasErrors()) {
-            throw new RuntimeException(result.getErrors().get(0).getMessage());
+            throw new APIQueryException(result.getErrors().get(0).getMessage());
         }
 
         return result;

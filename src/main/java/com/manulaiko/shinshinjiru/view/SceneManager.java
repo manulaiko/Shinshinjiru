@@ -1,5 +1,6 @@
 package com.manulaiko.shinshinjiru.view;
 
+import com.manulaiko.shinshinjiru.exception.UnableToLoadSceneException;
 import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -103,7 +104,7 @@ public class SceneManager {
         } catch (IOException e) {
             log.warn("Couldn't load scene!", e);
 
-            throw new RuntimeException(e);
+            throw new UnableToLoadSceneException(e);
         }
     }
 }

@@ -20,6 +20,7 @@ import java.net.InetSocketAddress;
  */
 @Service
 @Slf4j
+@SuppressWarnings("java:S1191")
 public class OAuthServer {
     private HttpServer server;
 
@@ -55,8 +56,7 @@ public class OAuthServer {
             server = HttpServer.create(new InetSocketAddress(port), 0);
             server.createContext(endpoint, authCallback);
         } catch (Exception e) {
-            System.out.println("Couldn't start HttpServer! " + e.getMessage());
-            e.printStackTrace();
+            log.error("Couldn't start HttpServer!", e);
         }
     }
 

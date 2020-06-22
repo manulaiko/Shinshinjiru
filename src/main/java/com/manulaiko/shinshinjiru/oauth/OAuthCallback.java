@@ -4,7 +4,7 @@ import com.manulaiko.shinshinjiru.ShinshinjiruApplication;
 import com.manulaiko.shinshinjiru.api.APIService;
 import com.manulaiko.shinshinjiru.api.APIToken;
 import com.manulaiko.shinshinjiru.api.event.InitUserEvent;
-import com.manulaiko.shinshinjiru.api.event.InitUserListsEvent;
+import com.manulaiko.shinshinjiru.exception.InvalidOAuthResponseException;
 import com.manulaiko.shinshinjiru.oauth.event.StopOauthServerEvent;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -26,6 +26,7 @@ import java.io.IOException;
  */
 @Component
 @Slf4j
+@SuppressWarnings("java:S1191")
 public class OAuthCallback implements HttpHandler {
     @Value("${oauth.url}")
     private String url;
@@ -46,7 +47,7 @@ public class OAuthCallback implements HttpHandler {
                                       .split("=");
 
         if (!params[0].equals("code")) {
-            throw new RuntimeException("Invalid OAuth response!");
+            throw new InvalidOAuthResponseException();
         }
 
         log.debug("Received OAuth callback with code " + params[1]);

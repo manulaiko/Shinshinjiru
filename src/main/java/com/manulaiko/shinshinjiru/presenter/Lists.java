@@ -15,7 +15,7 @@ import org.springframework.stereotype.Controller;
 /**
  * Lists presenter.
  * ================
- *
+ * <p>
  * Controller for the List.fxml view.
  *
  * @author Manulaiko <manulaiko@gmail.com>
@@ -24,7 +24,7 @@ import org.springframework.stereotype.Controller;
 @Slf4j
 public class Lists {
     @FXML
-    private TabPane lists;
+    private TabPane mediaLists;
 
     @Autowired
     private APIService api;
@@ -35,13 +35,13 @@ public class Lists {
     @FXML
     public void initialize() {
         log.debug("Loading List entries...");
-        var tabs = lists.getTabs();
+        var tabs = mediaLists.getTabs();
 
         api.getLists()
-               .getLists()
-               .stream()
-               .map(this::loadList)
-               .forEach(tabs::add);
+                .getLists()
+                .stream()
+                .map(this::loadList)
+                .forEach(tabs::add);
     }
 
     /**
@@ -66,9 +66,9 @@ public class Lists {
      */
     @EventListener
     public void deleteEntry(MediaListEntryDeletedEvent event) {
-        lists.getTabs()
-             .stream()
-             .map(t -> (TableList)t.getContent())
-             .forEach(t -> t.deleteEntry(event));
+        mediaLists.getTabs()
+                .stream()
+                .map(t -> (TableList) t.getContent())
+                .forEach(t -> t.deleteEntry(event));
     }
 }

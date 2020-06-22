@@ -1,7 +1,6 @@
 package com.manulaiko.shinshinjiru.api.event;
 
 import com.manulaiko.shinshinjiru.api.model.dto.ListActivity;
-import com.manulaiko.shinshinjiru.presenter.details.ListEntry;
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 
@@ -13,6 +12,7 @@ import org.springframework.context.ApplicationEvent;
  *
  * @author Manulaiko <manulaiko@gmail.com>
  */
+@SuppressWarnings("java:S1948")
 public class ReplyActivityEvent extends ApplicationEvent {
     @Getter
     private final ListActivity activity;

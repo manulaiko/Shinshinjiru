@@ -12,6 +12,7 @@ import org.springframework.context.ApplicationEvent;
  *
  * @author Manulaiko <manulaiko@gmail.com>
  */
+@SuppressWarnings("java:S1948")
 public class UpdateMediaListEntryEvent extends ApplicationEvent {
     @Getter
     private final MediaList entry;
