@@ -8,9 +8,14 @@ import com.manulaiko.shinshinjiru.api.event.UserListsInitializedEvent;
 import com.manulaiko.shinshinjiru.api.model.dto.*;
 import com.manulaiko.shinshinjiru.api.query.UserLists;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.configuration2.FileBasedConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Init user list handler.
@@ -25,6 +30,9 @@ import org.springframework.stereotype.Component;
 public class InitUserListsHandler implements ApplicationListener<InitUserListsEvent> {
     @Autowired
     private APIService api;
+
+    @Autowired
+    private FileBasedConfiguration config;
 
     /**
      * @inheritDoc
@@ -45,6 +53,8 @@ public class InitUserListsHandler implements ApplicationListener<InitUserListsEv
                 ),
                 UserLists.class
         );
+
+        config.setProperty("app.lastSync", ZonedDateTime.now().format(DateTimeFormatter.RFC_1123_DATE_TIME));
 
         ShinshinjiruApplication.publish(new UserListsInitializedEvent(
                 this,
