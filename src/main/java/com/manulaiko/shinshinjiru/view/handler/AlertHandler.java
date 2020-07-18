@@ -1,6 +1,7 @@
 package com.manulaiko.shinshinjiru.view.handler;
 
 import com.manulaiko.shinshinjiru.view.event.AlertEvent;
+import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
@@ -25,12 +26,22 @@ public class AlertHandler<T extends AlertEvent> implements ApplicationListener<T
     @Value("classpath:icon.png")
     private Resource icon;
 
+    private T event;
+
     /**
      * @inheritDoc
      */
-    @SneakyThrows
     @Override
     public void onApplicationEvent(T event) {
+        this.event = event;
+        Platform.runLater(this::show);
+    }
+
+    /**
+     * Performs the popup show in the FX thread.
+     */
+    @SneakyThrows
+    private void show() {
         var alert = new Alert(event.getType(), event.getMessage(), ButtonType.CLOSE);
         alert.setHeaderText(null);
         alert.initStyle(StageStyle.UTILITY);
