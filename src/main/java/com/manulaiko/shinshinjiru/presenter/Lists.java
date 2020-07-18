@@ -2,8 +2,11 @@ package com.manulaiko.shinshinjiru.presenter;
 
 import com.manulaiko.shinshinjiru.api.APIService;
 import com.manulaiko.shinshinjiru.api.event.MediaListEntryDeletedEvent;
+import com.manulaiko.shinshinjiru.api.event.UserListsInitializedEvent;
+import com.manulaiko.shinshinjiru.api.model.dto.MediaListCollection;
 import com.manulaiko.shinshinjiru.api.model.dto.MediaListGroup;
 import com.manulaiko.shinshinjiru.presenter.lists.TableList;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -35,10 +38,35 @@ public class Lists {
     @FXML
     public void initialize() {
         log.debug("Loading List entries...");
-        var tabs = mediaLists.getTabs();
 
-        api.getLists()
-                .getLists()
+        this.updateLists(api.getLists());
+    }
+
+    /**
+     * Update list tabs when the lists are initialized.
+     *
+     * @param event Fired event.
+     */
+    @EventListener
+    public void userListsInitializedHandler(UserListsInitializedEvent event) {
+        if (mediaLists == null) {
+            // not initialized yet.
+            return;
+        }
+
+        Platform.runLater(() -> this.updateLists(event.getLists()));
+    }
+
+    /**
+     * Updates the list tabs.
+     *
+     * @param lists List content.
+     */
+    private void updateLists(MediaListCollection lists) {
+        var tabs = mediaLists.getTabs();
+        tabs.clear();
+
+        lists.getLists()
                 .stream()
                 .map(this::loadList)
                 .forEach(tabs::add);
